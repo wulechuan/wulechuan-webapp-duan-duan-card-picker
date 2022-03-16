@@ -1,0 +1,14 @@
+{
+  "name": "@wulechuan/web-app--pick-a-card",
+  "version": "1.0.0",
+  "author": "吴乐川 <wulechuan@live.com>",
+  "license": "WTFPL",
+  "description": "我为端端写的一个小游戏。",
+  "main": "源代码/开始.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@wulechuan/cli-scripts--git-push": "^1.0.1"
+  }
+}
