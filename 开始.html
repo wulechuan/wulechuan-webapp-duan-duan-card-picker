@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-hans-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吴淙渊的第一个程序——《切换图片》</title>
+    <style>
+        html, body {
+            height: 100%;
+            font-size: 25px;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            justify-items: center;
+        }
+
+        .顶部内容块 {
+            flex: 0 0 auto;
+            color: #bbb;
+            background-color: #111;
+        }
+
+        .主体内容块 {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 0;
+        }
+
+        .主体内容块 .中央内容块 {
+            flex: 1 1 auto;
+            padding: 1em;
+        }
+
+        .主体内容块 .侧边栏 {
+            flex: 0 0 7.66em;
+            height: 100%;
+            overflow: visible;
+            z-index: 10;
+        }
+
+        article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 1.5em 0.5em 0.5em;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.33em;
+            margin: 0 0 0.5em;
+        }
+
+        p {
+            width: 1000px;
+            line-height: 1.75;
+            margin: 0.5em 0;
+            text-indent: 2em;
+        }
+
+        div,
+        figure {
+            text-align: center;
+        }
+
+        button {
+            font-size: 30px;
+            margin-bottom: 2em;
+            border-radius: 1000px;
+            border-style: solid;
+            border-width: 0.2em;
+            padding: 0.25em 1.75em;
+            width: 20em;
+            line-height: 1.5;
+            color: #fff;
+            border-color: rgb(32, 14, 112);
+            background-color: rgb(70, 54, 139);
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(76, 48, 204);
+        }
+
+        /* .主图内容块之根 {
+            font-size: 25px;
+        } */
+
+        .主图内容块之根 .中央部分 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20em;
+            height: 30em;
+            margin: auto;
+        }
+
+        .主图内容块之根 .主图容器 {
+            position: relative;
+        }
+
+        .主图内容块之根 img {
+            width: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .主图内容块之根 figcaption {
+            display: inline-block;
+            border-width: 0.2em;
+            border-style: solid;
+            border-radius: 1000px;
+            padding: 0.25em 2.5em;
+            margin-top: 0.5em;
+            color: hsl(35, 50%, 25%);
+            border-color: hsl(35, 35%, 56%);
+            background-color: hsl(37, 100%, 85%);
+        }
+
+        .内容之级别标记 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-style: solid;
+            border-width: 0.1em;
+            border-radius: 0.25em;
+            padding: 0.5em;
+            min-width: 3em;
+            height: 1em;
+            line-height: 1;
+        }
+
+        .神圣 .内容之级别标记 {
+            color: rgb(235, 202, 96);
+            border-color: currentColor;
+            background-color: rgb(24, 23, 22);
+        }
+
+        .高级 .内容之级别标记 {
+            color: black;
+            border-color: rgb(97, 69, 10);
+            background-color: rgb(255, 185, 32);
+        }
+
+        .中级 .内容之级别标记 {
+            color: white;
+            border-color: rgb(170, 57, 57);
+            background-color: rgb(223, 40, 40);
+        }
+
+        .普通 .内容之级别标记 {
+            color: white;
+            border-color: rgb(23, 53, 109);
+            background-color: rgb(36, 99, 216);
+        }
+
+        .主图内容块之根 .内容之级别标记 {
+            font-size: 1.25em;
+            margin: -0.75em -3.5em;
+            box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.25);
+        }
+
+        .历史记录内容块 {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            background-color: #444;
+        }
+
+        .历史记录内容块 .历史记录总数 {
+            position: absolute;
+            display: block;
+            width: 10em;
+            right: 100%;
+            top: 0;
+            margin: 0.5em 0;
+            padding: 0.5em 1em;
+            line-height: 1;
+            border-radius: 1000px 0 0 1000px;
+            background-color: rgb(206, 206, 206);
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .历史记录总数 em {
+            display: inline-block;
+            width: 2.5em;
+            text-align: right;
+            font-style: normal;
+        }
+
+        .历史记录内容块 .历史记录列表容器 {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        .历史记录列表 {
+            margin: 0;
+            padding: 0.5em 0;
+        }
+
+        .历史记录列表 > li {
+            list-style: none;
+            display: block;
+            box-sizing: border-box;
+            cursor: pointer;
+            padding: 0.5em;
+        }
+
+        .历史记录列表 > li.已选中 {
+            background-color: rgb(255, 181, 71);
+        }
+
+        .历史记录列表 > li .中央容器 {
+            display: block;
+            box-sizing: border-box;
+            width: 6em;
+            height: 6em;
+            border-width: 0.2em;
+            margin: auto;
+            border-style: solid;
+            border-color: #999;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .历史记录列表 > li.已选中 .中央容器 {
+            border-color: rgb(255, 255, 255);
+        }
+
+        .历史记录列表 > li:hover .中央容器 {
+            border-color: rgb(67, 241, 32);
+        }
+
+        
+        .历史记录列表 > li .图像 {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-size: cover;
+        }
+
+        .历史记录列表 > li .内容之级别标记 {
+            font-size: 0.5em;
+            margin: 0.25em;
+            box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <section class="顶部内容块">
+        <article>
+            <h1>吴淙渊的第一个程序——《切换图片》</h1>
+            <p>该程序制作始于2022年3月13日夜。其中包含一个按钮和若干图片。但仅显示这些图片之一，而不是统统显示。</p>
+            <p>每当用户点击该按钮或该图片时，程序会随机选择一张图片，显示出来。</p>
+        </article>
+    </section>
+
+    <section class="主体内容块">
+        <aside class="侧边栏"></aside>
+
+        <section class="中央内容块">
+            <div>
+                <button id="切换按钮">点击我，可显示图片</button>
+            </div>
+
+            <figure id="主图内容块之根" class="主图内容块之根">
+                <div class="中央部分">
+                    <div class="主图容器">
+                        <img id="主图" src="" alt="">
+                        <sup id="主图内容之级别标记" class="内容之级别标记" style="display: none;"></sup>
+                    </div>
+                </div>
+                <figcaption id="主图说明文字" style="display: none;"></figcaption>
+            </figure>
+        </section>
+
+        <aside class="侧边栏">
+            <div class="历史记录内容块">
+                <div class="历史记录总数">历史记录条数：<em id="历史记录总数值"></em></div>
+                <div class="历史记录列表容器">
+                    <ol id="历史记录列表" class="历史记录列表"></ol>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <script>
+        const 历史记录数量上限 = 12
+
+        const 所有图片的配置 = [
+            { 命中概率宽度: 0.1, 图片文件名: '龙龟.png' },
+
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 01 海马.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 02 海魔女.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 03 六面怪.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 04 海魔鱼.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 05 海幻妖.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 06 海皇子.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 07 海龙.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 海斗士 08 美人鱼.webp' },
+
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 01 摆渡人.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 02 法官.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 03 曼德拉花.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 04 地妖.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 05 妖蝶.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 06 魔鸟.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 07 巨斧.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 08 天贵星.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 09 天哭星.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 10 法老王.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 11 天雄星.webp' },
+            { 命中概率宽度: 10, 图片文件名: '穆逢春 冥斗士 12 天猛星.webp' },
+
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 01 天神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 02 天后.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 03 冥王.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 04 死神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 05 睡神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 06 太阳神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 07 月神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 08 战神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 09 农神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 10 火神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 11 厄运女神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 12 美神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 13 酒神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 14 雅典娜.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 15 海皇.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 16 商业之神.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 17 瞬被哈迪斯附身.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 哈迪斯剑.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 雅典娜神盾.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神 雅典娜胜利女神权杖.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 神仆 潘多拉.webp' },
+
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 白银 蛇夫座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 白银 天琴座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 白银 天鹰座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 钢铁战士 2.webp' },
+
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 01 白羊座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 01 牧羊座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 02 金牛座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 02 金牛座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 03 双子座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 03 双子座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 04 巨蟹座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 04 巨蟹座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 05 狮子座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 05 狮子座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 06 处女座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 06 处女座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 07 天秤座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 07 天秤座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 08 天蝎座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 08 天蝎座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 09 射手座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 09 射手座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 10 摩羯座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 10 摩羯座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 11 水瓶座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 11 水瓶座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 12 双鱼座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 12 双鱼座（冥）.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 黄金 教皇 史昂（冥）.webp' },
+
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 教皇 匕首.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 青铜 变色龙座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 青铜 独角兽座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 青铜 水蛇座.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 圣斗士 青铜 天狼座.webp' },
+
+            { 命中概率宽度: 3, 图片文件名: '穆逢春 圣斗士 五主角 01 星矢 冥界最终.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 五主角 01 星矢 神圣衣.webp' },
+            { 命中概率宽度: 3, 图片文件名: '穆逢春 圣斗士 五主角 02 紫龙 冥界最终.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 五主角 02 紫龙 神圣衣.webp' },
+            { 命中概率宽度: 3, 图片文件名: '穆逢春 圣斗士 五主角 03 冰河 冥界最终.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 五主角 03 冰河 神圣衣.webp' },
+            { 命中概率宽度: 3, 图片文件名: '穆逢春 圣斗士 五主角 04 瞬 冥界最终.webp' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 五主角 04 瞬 神圣衣.webp' },
+            { 命中概率宽度: 3, 图片文件名: '穆逢春 圣斗士 五主角 05 一辉 冥界最终.jpg' },
+            { 命中概率宽度: 1, 图片文件名: '穆逢春 圣斗士 五主角 05 一辉 神圣衣.webp' },
+
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 01 巨人.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 02 野狼.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 03 八腿野马.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 04 毒魔.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 05 琴手.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 06 北极虎.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 07 双头龙.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 08 神仆 希路达.webp' },
+            { 命中概率宽度: 5, 图片文件名: '穆逢春 星宫神斗士 09 奥丁.webp' },
+        ]
+
+        // 准备命中概率的辅助数字。
+        let 下一段的起始值 = 0
+        所有图片的配置.forEach(条目 => {
+            const { 命中概率宽度, 图片文件名 } = 条目
+
+            const 本段的结束值 = 下一段的起始值 + 命中概率宽度
+            条目.命中概率起始值 = 下一段的起始值
+            条目.命中概率结束值 = 本段的结束值
+            下一段的起始值 = 本段的结束值
+
+            条目.显示名称 = 图片文件名.replace(/\..+$/, '').replace(/\s\d+\s/, ' ').replace(/穆逢春\s+/, '').replace(/\s+/g, ' · ')
+
+            let 内容级别
+            if (命中概率宽度 <= 1) {
+                内容级别 = '神圣'
+            } else if (命中概率宽度 <= 5) {
+                内容级别 = '高级'
+            } else if (命中概率宽度 < 10) {
+                内容级别 = '中级'
+            } else {
+                内容级别 = '普通'
+            }
+
+            条目.内容级别 = 内容级别
+            条目.样式表类名 = 内容级别
+
+            条目.图片源 = `./图片资源/${图片文件名}`
+        })
+
+        const 最大概率数字 = 所有图片的配置[所有图片的配置.length - 1].命中概率结束值
+        // console.log(所有图片的配置)
+
+        // 准备历史列表变量。
+        let 历史记录列表 = []
+        let 选中的历史记录 = null
+
+        // -------- 元素之处理 ---------------------------------
+
+        // 找到【按钮元素】。
+        const 切换按钮元素 = document.querySelector('#切换按钮')
+
+        // 找到【主图内容块之根元素】。
+        const 主图内容块之根元素 = document.querySelector('#主图内容块之根')
+
+        // 找到【主图元素】。
+        const 主图元素 = document.querySelector('#主图')
+
+        // 找到【主图说明文字元素】。
+        const 主图说明文字元素 = document.querySelector('#主图说明文字')
+
+        // 找到【主图内容之级别标记元素】。
+        const 主图内容之级别标记元素 = document.querySelector('#主图内容之级别标记')
+
+        // 找到【历史记录列表元素】。
+        const 历史记录列表元素 = document.querySelector('#历史记录列表')
+
+        // 找到【历史记录总数值元素】。
+        const 历史记录总数值元素 = document.querySelector('#历史记录总数值')
+
+        // 给【按钮元素】、【主图元素】分别添加点击功能，随机切换【主图】。
+        主图元素.onclick = 切换按钮元素.onclick = function () {
+            将选中的主图条目呈现在界面中(随机选取主图条目())
+        }
+
+        历史记录列表元素.onclick = function (事件数据) {
+            const 点击的最内层元素 = 事件数据.target
+
+            /** @type {Element} */
+            let 点击的列表条目元素 = 点击的最内层元素
+            while (![ 'ol', 'li' ].includes(点击的列表条目元素.tagName.toLowerCase())) {
+                点击的列表条目元素 = 点击的列表条目元素.parentElement
+            }
+
+            if (点击的列表条目元素.tagName.toLowerCase() === 'li') {
+                const { 关联的历史记录 } = 点击的列表条目元素
+                将选中的主图条目呈现在界面中(关联的历史记录.主图条目, true)
+                选中该历史记录(关联的历史记录)
+            }
+        }
+
+        // -------- 主程序开始 ---------------------------------
+
+        将选中的主图条目呈现在界面中(所有图片的配置[-1], false)
+        更新界面中的历史记录总数值()
+
+        // -------- 方法之定义 ---------------------------------
+
+        function 随机选取主图条目 () {
+            const 随机整数 = Math.floor(Math.random() * 最大概率数字)
+            const 命中的条目 = 所有图片的配置.find(条目 => 条目.命中概率结束值 > 随机整数)
+            return 命中的条目
+        }
+
+        function 将选中的主图条目呈现在界面中 (主图条目, 系来自历史列表) {
+            if (!主图条目) {
+                主图内容块之根元素.className = '主图内容块之根'
+
+                主图元素.src = ''
+
+                主图说明文字元素.innerText = ''
+                主图说明文字元素.style.display = 'none'
+
+                主图内容之级别标记元素.innerText = ''
+                主图内容之级别标记元素.style.display = 'none'
+
+                切换按钮元素.innerText = '点击我，可显示图片'
+            } else {
+                主图内容块之根元素.className = [
+                    '主图内容块之根',
+                    主图条目.样式表类名,
+                ].join(' ')
+
+                主图元素.src = 主图条目.图片源
+
+                主图说明文字元素.innerText = 主图条目.显示名称
+                主图说明文字元素.style.display = ''
+
+                主图内容之级别标记元素.innerText = 主图条目.内容级别
+                主图内容之级别标记元素.style.display = ''
+
+                切换按钮元素.innerText = '点击我或点击图片，可改变图片'
+
+                if (!系来自历史列表) {
+                    创建历史记录元素并追加至历史列表(主图条目)
+                }
+            }
+        }
+
+        function 创建历史记录元素并追加至历史列表 (主图条目) {
+            if (!主图条目) { return false }
+
+            const 新的历史记录元素 = document.createElement('li')
+            新的历史记录元素.className = [
+                '历史记录条目',
+                主图条目.样式表类名,
+            ].join(' ')
+
+            const 新的历史记录之中央容器元素 = document.createElement('span')
+            新的历史记录之中央容器元素.className = '中央容器'
+
+            const 新的历史记录之图像元素 = document.createElement('span')
+            新的历史记录之图像元素.className = '图像'
+            新的历史记录之图像元素.style.backgroundImage = `url('${主图条目.图片源}')`
+
+            const 新的历史记录之内容级别标记元素 = document.createElement('sup')
+            新的历史记录之内容级别标记元素.className = '内容之级别标记'
+            新的历史记录之内容级别标记元素.innerText = 主图条目.内容级别
+
+            const 最末的历史记录 = 历史记录列表[0]
+
+            新的历史记录之中央容器元素.appendChild(新的历史记录之内容级别标记元素)
+            新的历史记录之中央容器元素.appendChild(新的历史记录之图像元素)
+
+            新的历史记录元素.appendChild(新的历史记录之中央容器元素)
+
+            const 新的历史记录 = {
+                主图条目,
+                元素: 新的历史记录元素,
+            }
+
+            新的历史记录元素.关联的历史记录 = 新的历史记录
+
+            /**
+             * 端儿要求：
+             * 当有新纪录将添加至历史记录列表时，那么：
+             *   - 如果事先没有选中任何条目，且在添加前历史记录数量已达上限，则删除最早的历史记录。
+             *   - 如果事先选中的条目是最末的历史记录，且在添加前历史记录数量已达上限，则删除最早的历史记录。
+             *   - 如果选中的条目不是最末的历史记录，不论历史记录数量是否已达上限，总是用新纪录直接替换该选中的旧记录。
+             */
+            const 应尽量替换选中的旧记录 = !!选中的历史记录 && 选中的历史记录 !== 历史记录列表[0] // && 历史记录列表.length >= 历史记录数量上限
+            let 已成功替换选中的旧记录 = false
+            if (应尽量替换选中的旧记录) {
+                已成功替换选中的旧记录 = 替换掉历史记录列表中的某记录或在其之后插入新纪录(选中的历史记录, 新的历史记录, true)
+            }
+
+            if (!已成功替换选中的旧记录) { // 选中的条目是最末的历史记录。
+                历史记录列表.unshift(新的历史记录)
+                确保历史记录总数不超越限度()
+
+                历史记录列表元素.insertBefore(新的历史记录元素, 最末的历史记录 ? 最末的历史记录.元素 : null)
+
+                更新界面中的历史记录总数值()
+                选中该历史记录(新的历史记录)
+            }
+
+            return true
+        }
+
+        function 确保历史记录总数不超越限度 () {
+            const 目前的历史记录数量 = 历史记录列表.length
+            if (目前的历史记录数量 > 历史记录数量上限) {
+                const 历史记录列表应截除的部分 = 历史记录列表.slice(历史记录数量上限)
+                const 历史记录列表应保留的部分 = 历史记录列表.slice(0, 历史记录数量上限)
+
+                历史记录列表应截除的部分.forEach(删除某条历史记录对应的界面元素)
+
+                历史记录列表 = 历史记录列表应保留的部分
+            }
+        }
+
+        function 删除某条历史记录对应的界面元素 (历史记录) {
+            const 历史记录元素 = 历史记录.元素
+            历史记录元素.parentElement.removeChild(历史记录元素)
+        }
+
+        function 更新界面中的历史记录总数值 () {
+            历史记录总数值元素.innerText = 历史记录列表.length
+        }
+
+        function 选中该历史记录 (须选中的历史记录) {
+            选中的历史记录 = null
+            历史记录列表.forEach(历史记录 => {
+                const { 主图条目 } = 历史记录
+
+                const 元素样式表类名集 = [
+                    '历史记录条目',
+                    主图条目.样式表类名,
+                ]
+
+                if (历史记录 === 须选中的历史记录) {
+                    元素样式表类名集.push('已选中')
+                    选中的历史记录 = 须选中的历史记录
+                }
+
+                // console.log(元素样式表类名集.join(' '), 主图条目.显示名称)
+                历史记录.元素.className = 元素样式表类名集.join(' ')
+            })
+        }
+
+        function 替换掉历史记录列表中的某记录或在其之后插入新纪录 (旧历史记录, 新历史记录, 应替换掉旧历史记录) {
+            let 在列表中找到了旧纪录 = false
+
+            const 新的历史记录列表 = []
+
+            历史记录列表.forEach(历史记录 => {
+                if (历史记录 === 旧历史记录) {
+                    在列表中找到了旧纪录 = true
+                    新的历史记录列表.push(新历史记录)
+
+                    const 旧元素 = 旧历史记录.元素
+                    const 新元素 = 新历史记录.元素
+                    旧元素.parentElement.insertBefore(新元素, 旧元素)
+                    if (应替换掉旧历史记录) {
+                        删除某条历史记录对应的界面元素(历史记录)
+                    } else {
+                        新的历史记录列表.push(历史记录)
+                    }
+                } else {
+                    新的历史记录列表.push(历史记录)
+                }
+            })
+
+            if (!在列表中找到了旧纪录) {
+                return false
+            }
+
+            历史记录列表 = 新的历史记录列表
+            选中该历史记录(null)
+
+            return true
+        }
+    </script>
+</body>
+</html>
