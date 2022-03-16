@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>吴淙渊的第一个程序——《切换图片》</title>
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
+        }
+
+        html {
             font-size: 25px;
         }
 
@@ -19,64 +23,9 @@
             justify-items: center;
         }
 
-        .顶部内容块 {
-            flex: 0 0 auto;
-            color: #bbb;
-            background-color: #111;
-        }
-
-        .主体内容块 {
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: row;
-            overflow: hidden;
-            justify-content: space-between;
-            align-items: stretch;
-            padding: 0;
-        }
-
-        .主体内容块 .中央内容块 {
-            flex: 1 1 auto;
-            padding: 1em;
-        }
-
-        .主体内容块 .侧边栏 {
-            flex: 0 0 7.66em;
-            height: 100%;
-            overflow: visible;
-            z-index: 10;
-        }
-
-        article {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 1.5em 0.5em 0.5em;
-            margin: 0;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 1.33em;
-            margin: 0 0 0.5em;
-        }
-
-        p {
-            width: 1000px;
-            line-height: 1.75;
-            margin: 0.5em 0;
-            text-indent: 2em;
-        }
-
-        div,
-        figure {
-            text-align: center;
-        }
-
         button {
             font-size: 30px;
-            margin-bottom: 2em;
+            margin-bottom: 1em;
             border-radius: 1000px;
             border-style: solid;
             border-width: 0.2em;
@@ -93,52 +42,96 @@
             background-color: rgb(76, 48, 204);
         }
 
-        /* .主图内容块之根 {
-            font-size: 25px;
-        } */
-
-        .主图内容块之根 .中央部分 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 20em;
-            height: 30em;
-            margin: auto;
+        .应用顶部内容块 {
+            z-index: 10;
+            flex: 0 0 3.75em;
+            height: 3.75em;
+            overflow: visible;
         }
 
-        .主图内容块之根 .主图容器 {
+        .应用主体内容块 {
+            z-index: 1;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 0;
+        }
+
+        .中央内容块 {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 1em;
+            overflow: hidden;
+        }
+
+        .侧边栏 {
+            box-sizing: border-box;
+            flex: 0 0 8.66em;
+            height: 100%;
+            overflow: visible;
+            z-index: 10;
+        }
+
+        article {
+            padding: 0.5em;
+            margin: 0;
+            color: #bbb;
+            background-color: #111;
+        }
+
+        article > section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0.5em 0;
+            margin: 0;
+        }
+
+        article .标题 {
             position: relative;
         }
 
-        .主图内容块之根 img {
-            width: 100%;
+        article .标题 button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0 1em;
+            width: auto;
+        }
+
+        article .说明正文内容块 {
             display: block;
+            width: 40em;
             margin: auto;
         }
 
-        .主图内容块之根 figcaption {
-            display: inline-block;
-            border-width: 0.2em;
-            border-style: solid;
-            border-radius: 1000px;
-            padding: 0.25em 2.5em;
-            margin-top: 0.5em;
-            color: hsl(35, 50%, 25%);
-            border-color: hsl(35, 35%, 56%);
-            background-color: hsl(37, 100%, 85%);
+        article h1 {
+            text-align: center;
+            font-size: 1.33em;
+            margin: 0;
+        }
+
+        article p {
+            width: 1000px;
+            line-height: 1.75;
+            margin: 0.5em 0;
+            text-indent: 2em;
         }
 
         .内容之级别标记 {
             position: absolute;
-            right: 0;
-            top: 0;
             border-style: solid;
-            border-width: 0.1em;
-            border-radius: 0.25em;
             padding: 0.5em;
             min-width: 3em;
             height: 1em;
             line-height: 1;
+            text-align: center;
         }
 
         .神圣 .内容之级别标记 {
@@ -165,9 +158,69 @@
             background-color: rgb(36, 99, 216);
         }
 
+        .中央内容块 .按钮内容块 {
+            box-sizing: border-box;
+            text-align: center;
+            height: 4em;
+        }
+
+        .主图内容块之根 {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .主图内容块之根 .中央部分 {
+            flex: 1 1 auto;
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: flex-start;
+            margin: auto;
+            width: 100%;
+            padding: 0;
+            overflow: auto;
+            background-color: #eee;
+        }
+
+        .主图内容块之根 .主图容器 {
+            position: relative;
+            text-align: center;
+            box-sizing: border-box;
+            width: 34em;
+            padding: 2em;
+        }
+
+        .主图内容块之根 img {
+            width: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .主图内容块之根 figcaption {
+            flex: 0 0 auto;
+            display: block;
+            border-width: 0.2em;
+            border-style: solid;
+            border-radius: 1000px;
+            padding: 0.25em 2.5em;
+            margin-top: 0.5em;
+            color: hsl(35, 50%, 25%);
+            border-color: hsl(35, 35%, 56%);
+            background-color: hsl(37, 100%, 85%);
+        }
+
         .主图内容块之根 .内容之级别标记 {
             font-size: 1.25em;
-            margin: -0.75em -3.5em;
+            margin: 1em;
+            right: 0;
+            top: 0;
+            border-width: 0.15em;
+            border-radius: 0.4em;
             box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.25);
         }
 
@@ -234,7 +287,7 @@
             border-style: solid;
             border-color: #999;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .历史记录列表 > li.已选中 .中央容器 {
@@ -245,7 +298,6 @@
             border-color: rgb(67, 241, 32);
         }
 
-        
         .历史记录列表 > li .图像 {
             display: block;
             width: 100%;
@@ -258,24 +310,54 @@
         .历史记录列表 > li .内容之级别标记 {
             font-size: 0.5em;
             margin: 0.25em;
+            left: 0;
+            bottom: 0;
+            border-width: 0.2em;
+            border-radius: 0.5em;
             box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.25);
+        }
+
+        .历史记录列表 > li .删除按钮 {
+            font-size: 0.75em;
+            display: none;
+            width: 1.5em;
+            height: 1.5em;
+            padding: 0;
+            border-width: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0.25em;
+            color: white;
+            border-color: rgb(155, 7, 7);
+            background-color: red;
+        }
+
+        .历史记录列表 > li:hover .删除按钮 {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <section class="顶部内容块">
+    <header class="应用顶部内容块">
         <article>
-            <h1>吴淙渊的第一个程序——《切换图片》</h1>
-            <p>该程序制作始于2022年3月13日夜。其中包含一个按钮和若干图片。但仅显示这些图片之一，而不是统统显示。</p>
-            <p>每当用户点击该按钮或该图片时，程序会随机选择一张图片，显示出来。</p>
-        </article>
-    </section>
+            <section class="标题">
+                <h1>吴淙渊的第一个程序——《切换图片》</h1>
+                <button id="说明的开关按钮">查看说明</button>
+            </section>
 
-    <section class="主体内容块">
+            <section id="说明正文内容块" class="说明正文内容块" style="display: none;">
+                <p>该程序制作始于2022年3月13日夜。其中包含一个按钮和若干图片。但仅显示这些图片之一，而不是统统显示。</p>
+                <p>每当用户点击该按钮或该图片时，程序会随机选择一张图片，显示出来。</p>
+            </section>
+        </article>
+    </header>
+
+    <section class="应用主体内容块">
         <aside class="侧边栏"></aside>
 
         <section class="中央内容块">
-            <div>
+            <div class="按钮内容块">
                 <button id="切换按钮">点击我，可显示图片</button>
             </div>
 
@@ -447,7 +529,13 @@
 
         // -------- 元素之处理 ---------------------------------
 
-        // 找到【按钮元素】。
+        // 找到【说明正文内容块元素】。
+        const 说明正文内容块元素 = document.querySelector('#说明正文内容块')
+
+        // 找到【说明的开关按钮元素】。
+        const 说明的开关按钮元素 = document.querySelector('#说明的开关按钮')
+
+        // 找到【切换按钮元素】。
         const 切换按钮元素 = document.querySelector('#切换按钮')
 
         // 找到【主图内容块之根元素】。
@@ -468,30 +556,58 @@
         // 找到【历史记录总数值元素】。
         const 历史记录总数值元素 = document.querySelector('#历史记录总数值')
 
-        // 给【按钮元素】、【主图元素】分别添加点击功能，随机切换【主图】。
-        主图元素.onclick = 切换按钮元素.onclick = function () {
-            将选中的主图条目呈现在界面中(随机选取主图条目())
+        // 给【说明的开关按钮元素】添加点击功能。
+        说明的开关按钮元素.onclick = function () {
+            const 旧的显示值 = 说明正文内容块元素.style.display
+            if (!旧的显示值) {
+                说明正文内容块元素.style.display = 'none'
+            } else {
+                说明正文内容块元素.style.display = ''
+            }
         }
 
+        // 给【按钮元素】、【主图元素】分别添加点击功能，随机切换【主图】。
+        主图元素.onclick = 切换按钮元素.onclick = function () {
+            将选中的主图条目呈现在界面中央(随机选取主图条目())
+        }
+
+        // 给【历史记录列表元素】添加点击功能，代理其子孙元素的点击事件。
+        /**
+         * @param {PointerEvent} 事件数据
+         */
         历史记录列表元素.onclick = function (事件数据) {
+            /** @type {Element} */
             const 点击的最内层元素 = 事件数据.target
 
-            /** @type {Element} */
+            let 应删除该条目 = false
+            if (点击的最内层元素.classList.contains('删除按钮')) {
+                应删除该条目 = true
+            }
+
             let 点击的列表条目元素 = 点击的最内层元素
             while (![ 'ol', 'li' ].includes(点击的列表条目元素.tagName.toLowerCase())) {
                 点击的列表条目元素 = 点击的列表条目元素.parentElement
             }
 
             if (点击的列表条目元素.tagName.toLowerCase() === 'li') {
-                const { 关联的历史记录 } = 点击的列表条目元素
-                将选中的主图条目呈现在界面中(关联的历史记录.主图条目, true)
-                选中该历史记录(关联的历史记录)
+                if (应删除该条目) {
+                    删除某条历史记录(点击的列表条目元素.关联的历史记录)
+                    事件数据.stopPropagation()
+                } else {
+                    当点击某历史记录条目元素时(点击的列表条目元素)
+                }
             }
+        }
+
+        function 当点击某历史记录条目元素时 (点击的列表条目元素) {
+            const { 关联的历史记录 } = 点击的列表条目元素
+            选中该历史记录(关联的历史记录)
+            将选中的主图条目呈现在界面中央(关联的历史记录.主图条目, true)
         }
 
         // -------- 主程序开始 ---------------------------------
 
-        将选中的主图条目呈现在界面中(所有图片的配置[-1], false)
+        将选中的主图条目呈现在界面中央(所有图片的配置[-1], false)
         更新界面中的历史记录总数值()
 
         // -------- 方法之定义 ---------------------------------
@@ -502,7 +618,7 @@
             return 命中的条目
         }
 
-        function 将选中的主图条目呈现在界面中 (主图条目, 系来自历史列表) {
+        function 将选中的主图条目呈现在界面中央 (主图条目, 系来自历史列表) {
             if (!主图条目) {
                 主图内容块之根元素.className = '主图内容块之根'
 
@@ -537,9 +653,7 @@
             }
         }
 
-        function 创建历史记录元素并追加至历史列表 (主图条目) {
-            if (!主图条目) { return false }
-
+        function 创建历史记录元素 (主图条目) {
             const 新的历史记录元素 = document.createElement('li')
             新的历史记录元素.className = [
                 '历史记录条目',
@@ -557,12 +671,23 @@
             新的历史记录之内容级别标记元素.className = '内容之级别标记'
             新的历史记录之内容级别标记元素.innerText = 主图条目.内容级别
 
-            const 最末的历史记录 = 历史记录列表[0]
+            const 新的历史记录之删除按钮 = document.createElement('button')
+            新的历史记录之删除按钮.className = '删除按钮'
+            新的历史记录之删除按钮.innerText = '⨉'
 
+            新的历史记录之中央容器元素.appendChild(新的历史记录之删除按钮)
             新的历史记录之中央容器元素.appendChild(新的历史记录之内容级别标记元素)
             新的历史记录之中央容器元素.appendChild(新的历史记录之图像元素)
 
             新的历史记录元素.appendChild(新的历史记录之中央容器元素)
+
+            return 新的历史记录元素
+        }
+
+        function 创建历史记录元素并追加至历史列表 (主图条目) {
+            const 新的历史记录元素 = 创建历史记录元素(主图条目)
+
+            if (!新的历史记录元素) { return false }
 
             const 新的历史记录 = {
                 主图条目,
@@ -570,6 +695,8 @@
             }
 
             新的历史记录元素.关联的历史记录 = 新的历史记录
+
+            const 最末的历史记录 = 历史记录列表[0]
 
             /**
              * 端儿要求：
@@ -607,6 +734,11 @@
 
                 历史记录列表 = 历史记录列表应保留的部分
             }
+        }
+
+        function 删除某条历史记录 (要删除的历史记录) {
+            历史记录列表 = 历史记录列表.filter(历史记录 => 历史记录 !== 要删除的历史记录)
+            删除某条历史记录对应的界面元素(要删除的历史记录)
         }
 
         function 删除某条历史记录对应的界面元素 (历史记录) {
