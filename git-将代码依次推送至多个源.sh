@@ -16,7 +16,7 @@ echo -e "\e[42;30m 【集德】上推（ git push ）至所有源：开始 \e[0;
     --git-origin-display-name='吴乐川：阿里云' \
     --git-origin-display-name-color='green'
 
-吴乐川-集德上推至单一源  --should-skip=false \
+吴乐川-集德上推至单一源  --should-skip=true \
     --git-origin-name='吴乐川：GitHub' \
     --git-origin-display-name='吴乐川：GitHub' \
     --git-origin-display-name-color='yellow'
