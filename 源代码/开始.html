@@ -38,6 +38,10 @@
             cursor: pointer;
         }
 
+        button.小尺寸 {
+            font-size: 20px;
+        }
+
         button:hover {
             background-color: rgb(76, 48, 204);
         }
@@ -108,7 +112,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            margin: 0 1em;
+            margin: 0 0.5em;
             width: auto;
         }
 
@@ -122,6 +126,8 @@
             text-align: center;
             font-size: 1.33em;
             margin: 0;
+            letter-spacing: 0.15em;
+            padding-left: 0.15em;
         }
 
         article p {
@@ -362,7 +368,7 @@
         <article>
             <section class="标题">
                 <h1>吴淙渊学习的第一个程序——《切换图片》</h1>
-                <button id="说明的开关按钮">查看说明</button>
+                <button id="说明的开关按钮" class="小尺寸">查看说明</button>
             </section>
 
             <section id="说明正文内容块" class="说明正文内容块" style="display: none;">
