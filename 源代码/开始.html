@@ -46,11 +46,41 @@
             background-color: rgb(76, 48, 204);
         }
 
-        button[disabled] {
+        button:disabled {
             cursor: not-allowed;
             color: #999;
             border-color: transparent;
             background-color: rgb(219, 219, 219);
+        }
+
+        label.包裹着输入项 {
+            cursor: pointer;
+            font-size: 30px;
+            padding: 0.25em 1em;
+            border-radius: 0.35em;
+            margin-right: 1em;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: flex-start;
+
+            line-height: 1.5;
+            color: black;
+        }
+
+        label.包裹着输入项:hover {
+            background-color: rgb(215, 209, 240);
+        }
+
+        label.包裹着输入项:disabled {
+            cursor: not-allowed;
+            color: #999;
+            border-color: transparent;
+        }
+
+        input[type="checkbox"] {
+            width: 2em;
+            height: 2em;
+            margin: 0.75em 1em 0.75em -0.75em;
         }
 
         .应用顶部内容块 {
@@ -178,9 +208,20 @@
         }
 
         .中央内容块 .控制面板内容块 {
+            position: relative;
             box-sizing: border-box;
             text-align: center;
-            height: 4em;
+            height: 3em;
+            margin-bottom: 1em;
+        }
+
+        .中央内容块 .控制面板内容块 label.包裹着输入项 {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            height: 1.5em;
+            margin: auto 0 auto -30em;
         }
 
         .主图内容块之根 {
@@ -383,12 +424,12 @@
 
         <section class="中央内容块">
             <div class="控制面板内容块">
-                <button id="切换按钮">点击我，可显示图片</button>
-
-                <label>
+                <label class="包裹着输入项 包裹着单选项">
                     <input id="切换候选图命中概率模式的元素" type="checkbox">
                     <span class="单选项配文">应反转图片的命中概率</span>
                 </label>
+
+                <button id="切换按钮">点击我，可显示图片</button>
             </div>
 
             <figure id="主图内容块之根" class="主图内容块之根">
@@ -702,7 +743,7 @@
                     正文内容块元素: 查找元素('#说明正文内容块'),
                     开关按钮元素: 查找元素('#说明的开关按钮'),
                 },
-                
+
                 $自定义事件之处理程序集: {
                 },
 
@@ -2119,7 +2160,7 @@
                         主图条目候选列表控制器.动作集.执行一切准备工作({
                             所有候选图配置之列表,
                             所有图片文件之公共路径,
-                            应反转命中概率: true,
+                            应反转命中概率: false,
                         })
 
                         中央主图控制器.动作集.执行一切准备工作({
