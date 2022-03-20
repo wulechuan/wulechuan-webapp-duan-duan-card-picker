@@ -380,10 +380,16 @@
             transition-property: background-color;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+        }
 
+        .缩略图列表 > li.该条目是新创建的 {
             animation-name: 动画_缩略图列表条目_诞生_根;
             animation-timing-function: ease-out;
             animation-duration: 0.319s;
+        }
+
+        .缩略图列表 > li.该条目是替换旧条目而加入的 {
+            animation-name: none;
         }
 
         .缩略图列表 > li.对应图片已在别处呈现 {
@@ -2058,6 +2064,12 @@
 
                         根元素.appendChild(中央容器元素)
 
+                        const 根元素系新创建的标记之样式类名 = '该条目是新创建的'
+                        根元素.classList.add(根元素系新创建的标记之样式类名)
+                        setTimeout(() => {
+                            根元素.classList.remove(根元素系新创建的标记之样式类名)
+                        }, 0.5 * 1000)
+
                         return 根元素
                     },
 
@@ -2194,6 +2206,13 @@
                                 缩略图列表元素.insertBefore(新元素, 旧元素)
 
                                 if (应替换掉旧缩略图条目) {
+                                    const 新元素系替换旧元素之标记之样式类名 = '该条目是替换旧条目而加入的'
+                                    新元素.classList.add(新元素系替换旧元素之标记之样式类名)
+
+                                    setTimeout(() => {
+                                        新元素.classList.remove(新元素系替换旧元素之标记之样式类名)
+                                    }, 0.5 * 1000)
+
                                     动作集.$删除某缩略图条目关联的一切界面元素(缩略图条目)
                                 } else {
                                     缩略图条目之新列表.push(缩略图条目)
@@ -2357,13 +2376,27 @@
                         // if (!参与交换的第一个缩略图条目 || !(参与交换的第一个缩略图条目.界面根元素 instanceof HTMLLIElement)) { return }
                         // if (!参与交换的第二个缩略图条目 || !(参与交换的第二个缩略图条目.界面根元素 instanceof HTMLLIElement)) { return }
 
+                        const 日志前缀 = `${this.本实体在日志中的称谓} -> 令两条目交换位置：`
+
                         const { 缩略图条目之列表 } = this.数据集
 
                         const 缩略图条目一的旧列表编号 = 缩略图条目之列表.indexOf(参与交换的第一个缩略图条目)
                         const 缩略图条目二的旧列表编号 = 缩略图条目之列表.indexOf(参与交换的第二个缩略图条目)
 
-                        if (缩略图条目一的旧列表编号 <= 0 || 缩略图条目二的旧列表编号 <= 0) { return }
-                        if (缩略图条目一的旧列表编号 === 缩略图条目二的旧列表编号) { return }
+                        if (缩略图条目一的旧列表编号 < 0) {
+                            console.debug(`${日志前缀} 第一个缩略图条目不在【缩略图条目之列表】中。`)
+                            return
+                        }
+
+                        if (缩略图条目二的旧列表编号 < 0) {
+                            console.debug(`${日志前缀} 第二个缩略图条目不在【缩略图条目之列表】中。`)
+                            return
+                        }
+
+                        if (缩略图条目一的旧列表编号 === 缩略图条目二的旧列表编号) {
+                            console.debug(`${日志前缀} 两个缩略图条目实际上是同一个。`)
+                            return
+                        }
 
                         const 界面根元素一 = 参与交换的第一个缩略图条目.界面根元素
                         const 界面根元素二 = 参与交换的第二个缩略图条目.界面根元素
@@ -2371,7 +2404,7 @@
                         const 界面根元素一之前的相邻元素 = 界面根元素一.nextElementSibling
                         const 界面根元素二之前的相邻元素 = 界面根元素二.nextElementSibling
 
-                        // console.log(参与交换的第一个缩略图条目.关联的主图条目.显示名称, '<==>', 参与交换的第二个缩略图条目.关联的主图条目.显示名称)
+                        console.log(`${日志前缀}\n\t 甲： ${参与交换的第一个缩略图条目.关联的主图条目.显示名称}\n\t 乙： ${参与交换的第二个缩略图条目.关联的主图条目.显示名称}`)
                         // console.debug(界面根元素一之前的相邻元素, 界面根元素二之前的相邻元素)
 
                         const { 缩略图列表元素 } = this.$界面元素集
