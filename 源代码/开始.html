@@ -342,16 +342,48 @@
             padding: 3em 0 12em;
         }
 
+        @keyframes 动画_缩略图列表条目_诞生_根 {
+            0% {
+                height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                background-color: transparent;
+            }
+
+            100% {
+                height: 8em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                /* background-color: rgba(255, 181, 71, 0.319); */
+            }
+        }
+
+        @keyframes 动画_缩略图列表条目_诞生_中央容器 {
+            0% {
+                position: relative;
+                left: -10em;
+            }
+
+            100% {
+                left: 0;
+            }
+        }
+
         .缩略图列表 > li {
             list-style: none;
             display: block;
             box-sizing: border-box;
+            overflow: hidden;
             padding: 0.5em 1em;
             cursor: pointer;
 
             transition-property: background-color;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+
+            animation-name: 动画_缩略图列表条目_诞生_根;
+            animation-timing-function: ease-out;
+            animation-duration: 0.319s;
         }
 
         .缩略图列表 > li.对应图片已在别处呈现 {
@@ -378,9 +410,17 @@
             transition-property: border-color, box-shadow;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+
+            animation-name: 动画_缩略图列表条目_诞生_中央容器;
+            animation-delay: 0.219s;
+            animation-timing-function: ease-out;
+            animation-duration: 0.219s;
+            animation-fill-mode: backwards;
         }
 
         .缩略图列表 > li.已选中 .中央容器 {
+            animation-delay: 0.1s;
+
             border-color: rgb(255, 255, 255);
             box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.45);
         }
