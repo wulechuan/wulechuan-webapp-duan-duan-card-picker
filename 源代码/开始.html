@@ -6,25 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>吴淙渊学习的第一个程序——《切换图片》</title>
     <style>
+        html {
+            font-size: 20px;
+        }
+
+        body {
+            margin: 0;
+        }
+
         html,
         body {
             height: 100%;
         }
 
-        html {
-            font-size: 25px;
-        }
-
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            justify-items: center;
-        }
-
         button {
-            font-size: 30px;
+            font-size: 1rem;
             box-sizing: border-box;
             margin-bottom: 1em;
             border-radius: 1000px;
@@ -44,7 +40,7 @@
         }
 
         button.小尺寸 {
-            font-size: 20px;
+            font-size: 0.75rem;
         }
 
         button:hover {
@@ -60,8 +56,8 @@
 
         label.包裹着输入项 {
             cursor: pointer;
-            font-size: 30px;
-            padding: 0.25em 1em;
+            font-size: 1rem;
+            padding: 0.25em 0.8em;
             border-radius: 0.35em;
             margin-right: 1em;
             display: inline-flex;
@@ -87,15 +83,26 @@
         }
 
         input[type="checkbox"] {
-            width: 2em;
-            height: 2em;
-            margin: 0.75em 1em 0.75em -0.75em;
+            font-size: inherit;
+            width: 1em;
+            height: 1em;
+            margin: 0.3em 0.7em 0.3em -0.2em;
+        }
+
+        .应用根 {
+            font-size: 1rem;
+            display: flex;
+            /* flex-wrap: wrap; */
+            flex-direction: column;
+            overflow: hidden;
+            justify-items: center;
+            height: 100%;
         }
 
         .应用顶部内容块 {
             z-index: 10;
-            flex: 0 0 3.75em;
-            height: 3.75em;
+            flex: 0 0 3em;
+            height: 3em;
             overflow: visible;
         }
 
@@ -121,14 +128,17 @@
 
         .侧边栏 {
             box-sizing: border-box;
-            flex: 0 0 8.66em;
+            flex: 0 0 10em;
             height: 100%;
             overflow: visible;
             z-index: 10;
         }
 
         article {
+            font-size: 0.85rem;
+            box-sizing: border-box;
             padding: 0.5em;
+            min-height: 100%;
             margin: 0;
             color: #bbb;
             background-color: #111;
@@ -143,23 +153,27 @@
             margin: 0;
         }
 
-        article .标题 {
+        article .标题内容块 {
             position: relative;
         }
 
-        article .标题 button {
+        article .标题内容块 button {
             position: absolute;
             top: 0;
             right: 0;
             padding: 0.25em 1.75em;
-            margin: 0 0.5em;
+            margin: 0.4em 7.5em 0 0;
             width: auto;
         }
 
         article .说明书正文内容块 {
+            box-sizing: border-box;
             display: block;
-            width: 40em;
-            margin: auto;
+            padding: 0.5em 2em 1.5em;
+            max-width: 44em;
+            width: 100%;
+            margin: 1em auto;
+            background-color: rgba(255, 255, 255, 0.079);
         }
 
         article h1 {
@@ -171,7 +185,6 @@
         }
 
         article p {
-            width: 1000px;
             line-height: 1.75;
             margin: 0.5em 0;
             text-indent: 2em;
@@ -182,7 +195,6 @@
             border-style: solid;
             padding: 0.5em 0.75em;
             min-width: 3em;
-            height: 1em;
             line-height: 1;
             text-align: center;
         }
@@ -220,23 +232,27 @@
         .中央内容块 .控制面板内容块 {
             position: relative;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            height: 3em;
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
+            padding-right: 16em;
         }
 
         .中央内容块 .控制面板内容块 label.包裹着输入项 {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            height: 1.5em;
-            margin: auto 0 auto -30em;
+            box-sizing: border-box;
+            width: 14em;
+            margin: 0.25em 1em;
         }
 
         .中央内容块 .控制面板内容块 button {
+            display: inline-block;
             width: 20em;
-            padding: 0.25em 1.75em;
+            padding: 0.25em 1.5em;
+            margin: 0;
         }
 
         .主图内容块之根 {
@@ -266,7 +282,7 @@
             position: relative;
             text-align: center;
             box-sizing: border-box;
-            width: 34em;
+            width: 30em;
             padding: 2em;
         }
 
@@ -283,7 +299,7 @@
             border-style: solid;
             border-radius: 1000px;
             padding: 0.25em 2.5em;
-            margin-top: 0.5em;
+            margin: 0.5em auto;
 
             color: hsl(35, 50%, 25%);
             border-color: hsl(35, 35%, 56%);
@@ -291,7 +307,7 @@
         }
 
         .主图内容块之根 .内容之级别标记 {
-            font-size: 1.25em;
+            font-size: 1.1em;
             margin: 1em;
             right: 0;
             top: 0;
@@ -342,33 +358,6 @@
             padding: 3em 0 12em;
         }
 
-        @keyframes 动画_缩略图列表条目_诞生_根 {
-            0% {
-                height: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-                background-color: transparent;
-            }
-
-            100% {
-                height: 8em;
-                padding-top: 0.5em;
-                padding-bottom: 0.5em;
-                /* background-color: rgba(255, 181, 71, 0.319); */
-            }
-        }
-
-        @keyframes 动画_缩略图列表条目_诞生_中央容器 {
-            0% {
-                position: relative;
-                left: -10em;
-            }
-
-            100% {
-                left: 0;
-            }
-        }
-
         .缩略图列表 > li {
             list-style: none;
             display: block;
@@ -382,18 +371,8 @@
             transition-duration: 0.319s;
         }
 
-        .缩略图列表 > li.该条目是新创建的 {
-            animation-name: 动画_缩略图列表条目_诞生_根;
-            animation-timing-function: ease-out;
-            animation-duration: 0.319s;
-        }
-
-        .缩略图列表 > li.该条目是替换旧条目而加入的 {
-            animation-name: none;
-        }
-
         .缩略图列表 > li.对应图片已在别处呈现 {
-            background-color: rgba(255, 181, 71, 0.319);
+            background-color: rgba(255, 181, 71, 0.45);
         }
 
         .缩略图列表 > li.已选中 {
@@ -412,16 +391,105 @@
             overflow: visible;
 
             border-color: #999;
+            background-color: #ddd;
 
             transition-property: border-color, box-shadow;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+        }
 
-            animation-name: 动画_缩略图列表条目_诞生_中央容器;
-            animation-delay: 0.219s;
+        @keyframes 动画_缩略图列表条目_诞生_根 {
+            0% {
+                height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                background-color: transparent;
+            }
+
+            66% {
+                height: 8em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                /* background-color: transparent; */
+            }
+
+            100% {
+                background-color: rgba(255, 181, 71, 0.45);
+            }
+        }
+
+        @keyframes 动画_缩略图列表条目_诞生_中央容器 {
+            0% {
+                position: relative;
+                opacity: 0;
+                left: -10em;
+            }
+
+            100% {
+                opacity: 1;
+                left: 0;
+            }
+        }
+
+        @keyframes 动画_缩略图列表条目_消亡_根 {
+            0% {
+                height: 8em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+            }
+
+            100% {
+                height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                background-color: transparent;
+            }
+        }
+
+        @keyframes 动画_缩略图列表条目_消亡_中央容器 {
+            0% {
+                position: relative;
+                opacity: 1;
+                left: 0;
+            }
+
+            100% {
+                opacity: 0;
+                left: 10em;
+            }
+        }
+
+        .缩略图列表 > li.该条目是新创建的 {
+            animation-name: 动画_缩略图列表条目_诞生_根;
             animation-timing-function: ease-out;
+            animation-duration: 0.79s;
+            transition: none;
+        }
+
+        .缩略图列表 > li.该条目是替换旧条目而加入的 {
+            animation-name: none;
+        }
+
+        .缩略图列表 > li .中央容器 {
+            animation-name: 动画_缩略图列表条目_诞生_中央容器;
+            animation-timing-function: ease-out;
+            animation-delay: 0.19s;
+            animation-duration: 0.16s;
+            animation-fill-mode: backwards;
+        }
+
+        .缩略图列表 > li.该条目正在消亡 {
+            animation-name: 动画_缩略图列表条目_消亡_根;
+            animation-timing-function: ease-out;
+            animation-delay: 0.19s;
             animation-duration: 0.219s;
             animation-fill-mode: backwards;
+        }
+
+        .缩略图列表 > li.该条目正在消亡 .中央容器 {
+            animation-name: 动画_缩略图列表条目_消亡_中央容器;
+            animation-timing-function: ease-out;
+            animation-duration: 0.219s;
         }
 
         .缩略图列表 > li.已选中 .中央容器 {
@@ -445,7 +513,9 @@
         }
 
         .缩略图列表 > li .内容之级别标记 {
-            font-size: 0.5em;
+            font-size: 0.6em;
+            padding: 0.3em;
+            min-width: none;
             margin: 0.25em;
             left: 0;
             top: 0;
@@ -478,7 +548,6 @@
 
         .缩略图列表 > li .交换两条目位置之功能面板 {
             display: flex;
-            font-size: 20px;
             z-index: 20;
             box-sizing: border-box;
             flex-direction: row;
@@ -493,21 +562,29 @@
             bottom: 0;
             width: 100%;
             height: 0;
-            padding: 0 0.5em;
+            padding: 0 0.33em;
             margin: 0;
             border-radius: 0;
-
-            /* background-color: rgba(255, 255, 255, 0.319);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 -0.25em 0.25em rgba(0, 0, 0, 0.219); */
 
             transition-property: height, padding;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
         }
 
+        .应全面采用端儿偏好的样式 .缩略图列表 > li .交换两条目位置之功能面板 {
+            background-color: transparent;
+            backdrop-filter: none;
+            box-shadow: none;
+        }
+
+        .应全面采用吴乐川偏好的样式 .缩略图列表 > li .交换两条目位置之功能面板 {
+            background-color: rgba(255, 255, 255, 0.319);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 -0.25em 0.25em rgba(0, 0, 0, 0.219);
+        }
+
         .缩略图列表 > li .交换两条目位置之功能面板 button.条目交换位置之按钮 {
-            font-size: 16px;
+            font-size: 0.75em;
             margin: auto;
             padding: 0.3em;
             width: 7.5em;
@@ -522,58 +599,82 @@
 
         .缩略图列表.已有选中的条目 > li.未选中:hover .交换两条目位置之功能面板 {
             /* display: flex; */
-            height: 5.25em;
+            height: 4.5em;
+        }
+    </style>
+
+    <style>
+        @media screen and (max-width: 1100px) and (min-height: 1100px) {
+            html { font-size: 24px; }
+            article .标题内容块 button { margin-right: 1em; }
+            .侧边栏.内容空白-仅用于占位 { display: none; }
+            .中央内容块 .控制面板内容块 { padding-right: 0; }
+            .主图内容块之根 .主图容器 { width: 100%;}
+        }
+
+        @media screen and (min-width: 1930px) {
+            html { font-size: 24px; }
+        }
+
+        @media screen and (min-width: 2550px) {
+            html { font-size: 28px; }
+        }
+
+        @media screen and (min-width: 2870px) {
+            html { font-size: 40px; }
         }
     </style>
 </head>
 <body>
-    <header class="应用顶部内容块">
-        <article>
-            <section class="标题">
-                <h1>吴淙渊学习的第一个程序——《切换图片》</h1>
-                <button id="说明书的开关按钮" class="小尺寸">呈现说明书</button>
+    <div id="应用根" class="应用根">
+        <header class="应用顶部内容块">
+            <article>
+                <section class="标题内容块">
+                    <h1>吴淙渊学习的第一个程序——《切换图片》</h1>
+                    <button id="说明书的开关按钮" class="小尺寸">呈现说明书</button>
+                </section>
+
+                <section id="说明书正文内容块" class="说明书正文内容块" style="display: none;">
+                    <p>该程序制作始于2022年3月13日夜。其中包含一个按钮和若干图片。但仅显示这些图片之一，而不是统统显示。</p>
+                    <p>每当用户点击该按钮或该图片时，程序会随机选择一张图片，显示出来。</p>
+                </section>
+            </article>
+        </header>
+
+        <section class="应用主体内容块">
+            <aside class="侧边栏 内容空白-仅用于占位"></aside>
+
+            <section class="中央内容块">
+                <div class="控制面板内容块">
+                    <label class="包裹着输入项 包裹着单选项">
+                        <input id="切换候选图命中概率模式的元素" type="checkbox">
+                        <span class="单选项配文">应反转图片的命中概率</span>
+                    </label>
+
+                    <button id="切换按钮">点击我，可显示图片</button>
+                </div>
+
+                <figure id="主图内容块之根" class="主图内容块之根">
+                    <div class="中央部分">
+                        <div class="主图容器">
+                            <img id="主图" src="" alt="">
+                            <sup id="主图内容之级别标记" class="内容之级别标记" style="display: none;"></sup>
+                        </div>
+                    </div>
+                    <figcaption id="主图说明文字" style="display: none;"></figcaption>
+                </figure>
             </section>
 
-            <section id="说明书正文内容块" class="说明书正文内容块" style="display: none;">
-                <p>该程序制作始于2022年3月13日夜。其中包含一个按钮和若干图片。但仅显示这些图片之一，而不是统统显示。</p>
-                <p>每当用户点击该按钮或该图片时，程序会随机选择一张图片，显示出来。</p>
-            </section>
-        </article>
-    </header>
-
-    <section class="应用主体内容块">
-        <aside class="侧边栏"></aside>
-
-        <section class="中央内容块">
-            <div class="控制面板内容块">
-                <label class="包裹着输入项 包裹着单选项">
-                    <input id="切换候选图命中概率模式的元素" type="checkbox">
-                    <span class="单选项配文">应反转图片的命中概率</span>
-                </label>
-
-                <button id="切换按钮">点击我，可显示图片</button>
-            </div>
-
-            <figure id="主图内容块之根" class="主图内容块之根">
-                <div class="中央部分">
-                    <div class="主图容器">
-                        <img id="主图" src="" alt="">
-                        <sup id="主图内容之级别标记" class="内容之级别标记" style="display: none;"></sup>
+            <aside class="侧边栏">
+                <div id="历史记录列表内容块" class="缩略图列表模块">
+                    <div class="缩略图条目总数">历史记录条数：<em class="缩略图条目总数之值">0</em></div>
+                    <div class="缩略图列表容器">
+                        <ol class="缩略图列表"></ol>
                     </div>
                 </div>
-                <figcaption id="主图说明文字" style="display: none;"></figcaption>
-            </figure>
+            </aside>
         </section>
-
-        <aside class="侧边栏">
-            <div id="历史记录列表内容块" class="缩略图列表模块">
-                <div class="缩略图条目总数">历史记录条数：<em class="缩略图条目总数之值">0</em></div>
-                <div class="缩略图列表容器">
-                    <ol class="缩略图列表"></ol>
-                </div>
-            </div>
-        </aside>
-    </section>
+    </div>
 
     <script>
         /** @type {T_端端的应用} */
@@ -759,7 +860,6 @@
 
             /** @type {typeof document.createElement} */
             const 创建元素 = document.createElement.bind(document)
-
 
             /**
              * @param {any} 值
@@ -2140,7 +2240,35 @@
                      */
                     $删除某缩略图条目关联的一切界面元素 (所涉缩略图条目) {
                         const 所涉根元素 = 所涉缩略图条目.界面根元素
-                        所涉根元素.parentElement.removeChild(所涉根元素)
+                        const { classList } = 所涉根元素
+
+                        const 样式类名_正在消亡 = '该条目正在消亡'
+
+                        let 已经消亡 = false
+                        let 定时器编号 = NaN
+
+                        if (!classList.contains(样式类名_正在消亡)) {
+                            classList.add(样式类名_正在消亡)
+
+                            所涉根元素.addEventListener('animationend', 消亡善后)
+                            定时器编号 = setTimeout(消亡善后, 0.6 * 1000)
+                        }
+
+                        function 消亡善后 (或事件或空) {
+                            // console.debug('消亡善后', 或事件或空)
+
+                            if (已经消亡) { return }
+
+                            // classList.remove(样式类名_正在消亡)
+
+                            所涉根元素.removeEventListener('animationend', 消亡善后)
+                            if (定时器编号) { clearTimeout(定时器编号) }
+
+                            所涉根元素.parentElement.removeChild(所涉根元素)
+
+                            定时器编号 = NaN
+                            已经消亡 = true
+                        }
                     },
 
                     /**
@@ -2272,15 +2400,16 @@
 
                         数据集.缩略图条目之列表.forEach(缩略图条目 => {
                             const { 界面根元素 } = 缩略图条目
+                            const { classList } = 界面根元素
 
                             if (!应标记的缩略图条目 && 缩略图条目 === 欲标记的缩略图条目) {
-                                if (!界面根元素.classList.contains(样式表特征类名)) {
-                                    界面根元素.classList.add(样式表特征类名)
+                                if (!classList.contains(样式表特征类名)) {
+                                    classList.add(样式表特征类名)
                                 }
                                 应标记的缩略图条目 = 欲标记的缩略图条目
                             } else {
-                                if (界面根元素.classList.contains(样式表特征类名)) {
-                                    界面根元素.classList.remove(样式表特征类名)
+                                if (classList.contains(样式表特征类名)) {
+                                    classList.remove(样式表特征类名)
                                 }
                             }
                         })
@@ -2505,6 +2634,14 @@
              * *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
              *
              * ----------------------------------------
+             * @property {object} $界面元素集
+             * ----------------------------------------
+             *
+             * @property {HTMLDivElement} $界面元素集.应用根元素
+             *
+             * *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+             *
+             * ----------------------------------------
              * @property {object} 部件集
              * ----------------------------------------
              *
@@ -2518,6 +2655,9 @@
              * ----------------------------------------
              * @property {object} 动作集
              * ----------------------------------------
+             *
+             * @property {(this: T_端端的应用) => void} 动作集.$处理网址携带中的信息
+             * @property {(this: T_端端的应用) => void} 动作集.$为各部件逐一执行准备工作并建立各方关联
              *
              * *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
              */
@@ -2542,130 +2682,44 @@
                     历史记录数量上限,
                 },
 
-                /**
-                 * @this {T_端端的应用}
-                 */
-                $执行一切准备工作 () {
-                    const { 本实体在日志中的称谓, 数据集, 部件集 } = this
-
-                    console.log(`${本实体在日志中的称谓}：正在开展准备工作……`)
-
-                    const {
-                        所有候选图配置之列表,
-                        所有图片文件之公共路径,
-                    } = 数据集
-
-                    const {
-                        应用顶部说明内容控制器,
-                        主图条目候选列表控制器,
-                        中央主图控制器,
-                        历史记录列表控制器,
-                    } = 部件集
-
-                    // -------- 逐一准备各部件 ---------------------------------
-
-                    应用顶部说明内容控制器.执行一切准备工作()
-
-                    主图条目候选列表控制器.执行一切准备工作({
-                        所有候选图配置之列表,
-                        所有图片文件之公共路径,
-                        应反转命中概率: false,
-                    })
-
-                    中央主图控制器.执行一切准备工作({
-                        已知的候选图数量: 主图条目候选列表控制器.数据集.所有候选主图条目之列表.length,
-                        自定义事件之处理程序集: {
-                            当请求外界给出新的主图条目时 (主动请求切换主图的原因) {
-                                // console.debug(`${this.本实体在日志中的称谓}：当请求外界给出新的主图条目时，原因：`, 主动请求切换主图的原因)
-                                return 主图条目候选列表控制器.动作集.随机选取一个条目()
-                            },
-
-                            当已经切换至新的主图时 ({ 已呈现的主图条目, 主图变更原因, 主图变更原因的相关数据 }) {
-                                if (已呈现的主图条目) {
-                                    console.log(`${this.本实体在日志中的称谓}：主图已切换至 《${已呈现的主图条目.显示名称}》。`)
-                                } else {
-                                    console.log(`${this.本实体在日志中的称谓}：主图已清除。`)
-                                }
-                                // console.debug('\t 主图变更原因：', 主图变更原因, '\n\t 主图变更原因的相关数据', 主图变更原因的相关数据)
-
-                                let 引发主图变动的缩略图列表并非历史记录列表 = true
-
-                                if (主图变更原因的相关数据) {
-                                    const {
-                                        引发主图变动的缩略图列表控制器,
-                                        引发主图变动的缩略图条目,
-                                    } = 主图变更原因的相关数据
-
-                                    引发主图变动的缩略图列表并非历史记录列表 = 引发主图变动的缩略图列表控制器 !== 历史记录列表控制器
-
-                                    // if (引发主图变动的缩略图列表控制器 && 引发主图变动的缩略图列表控制器 !== 历史记录列表控制器 && 引发主图变动的缩略图条目) {
-                                    //     引发主图变动的缩略图列表控制器.将某缩略图条目标记为在别处呈现图片的对应缩略图({
-                                    //         欲标记的缩略图条目: 引发主图变动的缩略图条目,
-                                    //         引发标记该缩略图条目的原因: '外界通知该缩略图列表控制器某缩略图条目对应的图片已呈现',
-                                    //     })
-                                    // }
-                                }
-
-                                if (引发主图变动的缩略图列表并非历史记录列表) {
-                                    const 应替换而非追加缩略图条目 = ![
-                                        '点击了切换按钮',
-                                    ].includes(主图变更原因)
-
-                                    const 如果是追加缩略图条目则追加在列表末尾 = false
-                                    // const 如果是追加缩略图条目则追加在列表末尾 = [
-                                    //     '点击了切换按钮',
-                                    // ].includes(主图变更原因)
-
-                                    历史记录列表控制器.动作集.为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目({
-                                        所涉主图条目: 已呈现的主图条目,
-                                        应替换而非追加缩略图条目,
-                                        如果是追加缩略图条目则追加在列表末尾,
-                                    })
-                                }
-                            },
-                        },
-                    })
-
-                    历史记录列表控制器.执行一切准备工作({
-                        本实体在日志中的称谓: '历史记录列表控制器',
-                        缩略图条目数量上限: 历史记录数量上限,
-                        自定义事件之处理程序集: {
-                            当某缩略图条目删除时 (已删除的缩略图条目) {
-                                if (已删除的缩略图条目.关联的主图条目 === 中央主图控制器.数据集.呈现的主图条目) {
-                                    中央主图控制器.动作集.变更主图({
-                                        欲呈现的主图条目: null,
-                                        主图变更原因: '某缩略图列表删除了特定图片',
-                                        主图变更原因的相关数据: null,
-                                    })
-                                }
-                            },
-
-                            当某缩略图条目请求在别处呈现对应图片时 ({ 请求呈现对应图片的缩略图条目, 该条目被标记的原因 }) {
-                                if (请求呈现对应图片的缩略图条目 && 该条目被标记的原因 !== '外界通知该缩略图列表控制器某缩略图条目对应的图片已呈现') {
-                                    中央主图控制器.动作集.变更主图({
-                                        欲呈现的主图条目: 请求呈现对应图片的缩略图条目.关联的主图条目,
-                                        主图变更原因: '某缩略图列表请求呈现特定图片',
-                                        主图变更原因的相关数据: {
-                                            引发主图变动的缩略图列表控制器: 历史记录列表控制器,
-                                            引发主图变动的缩略图条目: 请求呈现对应图片的缩略图条目,
-                                        },
-                                    })
-                                }
-                            },
-                        },
-                    })
+                $界面元素集: {
+                    应用根元素: 查找元素('#应用根'),
                 },
 
                 /**
                  * @this {T_端端的应用}
                  */
-                开始运行 () {
-                    const { 本实体在日志中的称谓, 部件集 } = this
+                启动 () {
+                    const { 本实体在日志中的称谓 } = this
 
                     console.log(`${本实体在日志中的称谓}：启动。`)
 
                     为成批的函数绑定_this_对象(本实体在日志中的称谓, this, this, [ '$执行一切准备工作' ])
+                    为成批的函数绑定_this_对象(本实体在日志中的称谓, this, this, [ '$开始运转' ])
+
                     this.$执行一切准备工作()
+                    this.$开始运转()
+                },
+
+                /**
+                 * @this {T_端端的应用}
+                 */
+                $执行一切准备工作 () {
+                    const { 本实体在日志中的称谓, 动作集 } = this
+
+                    console.log(`${本实体在日志中的称谓}：正在开展准备工作……`)
+
+                    为成批的函数绑定_this_对象(本实体在日志中的称谓, this, 动作集, null)
+
+                    动作集.$处理网址携带中的信息()
+                    动作集.$为各部件逐一执行准备工作并建立各方关联()
+                },
+
+                /**
+                 * @this {T_端端的应用}
+                 */
+                $开始运转 () {
+                    const { 本实体在日志中的称谓, 部件集 } = this
 
                     console.log(`${本实体在日志中的称谓}：现在开始运行。`)
 
@@ -2685,17 +2739,148 @@
                 },
 
                 动作集: {
+                    /**
+                     * @this {T_端端的应用}
+                     */
+                    $处理网址携带中的信息 () {
+                        const 网址中的查询项之集 = new URLSearchParams(window.location.search)
+                        const 网址中的一切查询项的参数名之列表 = Array.from(网址中的查询项之集.keys())
+                        const 应采用吴乐川偏好的样式 = 网址中的一切查询项的参数名之列表.includes('l') || 网址中的一切查询项的参数名之列表.includes('L')
+
+                        const { 应用根元素 } = this.$界面元素集
+                        const { classList } = 应用根元素
+
+                        if (应采用吴乐川偏好的样式) {
+                            classList.add('应全面采用吴乐川偏好的样式')
+                            classList.remove('应全面采用端儿偏好的样式')
+                        } else {
+                            classList.add('应全面采用端儿偏好的样式')
+                            classList.remove('应全面采用吴乐川偏好的样式')
+                        }
+                    },
+
+                    /**
+                     * @this {T_端端的应用}
+                     */
+                    $为各部件逐一执行准备工作并建立各方关联 () {
+                        const { 本实体在日志中的称谓, 数据集, 部件集, 动作集 } = this
+
+                        const {
+                            所有候选图配置之列表,
+                            所有图片文件之公共路径,
+                        } = 数据集
+
+                        const {
+                            应用顶部说明内容控制器,
+                            主图条目候选列表控制器,
+                            中央主图控制器,
+                            历史记录列表控制器,
+                        } = 部件集
+
+                        // -------- 逐一准备各部件 ---------------------------------
+
+                        应用顶部说明内容控制器.执行一切准备工作()
+
+                        主图条目候选列表控制器.执行一切准备工作({
+                            所有候选图配置之列表,
+                            所有图片文件之公共路径,
+                            应反转命中概率: false,
+                        })
+
+                        中央主图控制器.执行一切准备工作({
+                            已知的候选图数量: 主图条目候选列表控制器.数据集.所有候选主图条目之列表.length,
+                            自定义事件之处理程序集: {
+                                当请求外界给出新的主图条目时 (主动请求切换主图的原因) {
+                                    // console.debug(`${this.本实体在日志中的称谓}：当请求外界给出新的主图条目时，原因：`, 主动请求切换主图的原因)
+                                    return 主图条目候选列表控制器.动作集.随机选取一个条目()
+                                },
+
+                                当已经切换至新的主图时 ({ 已呈现的主图条目, 主图变更原因, 主图变更原因的相关数据 }) {
+                                    if (已呈现的主图条目) {
+                                        console.log(`${this.本实体在日志中的称谓}：主图已切换至 《${已呈现的主图条目.显示名称}》。`)
+                                    } else {
+                                        console.log(`${this.本实体在日志中的称谓}：主图已清除。`)
+                                    }
+                                    // console.debug('\t 主图变更原因：', 主图变更原因, '\n\t 主图变更原因的相关数据', 主图变更原因的相关数据)
+
+                                    let 引发主图变动的缩略图列表并非历史记录列表 = true
+
+                                    if (主图变更原因的相关数据) {
+                                        const {
+                                            引发主图变动的缩略图列表控制器,
+                                            引发主图变动的缩略图条目,
+                                        } = 主图变更原因的相关数据
+
+                                        引发主图变动的缩略图列表并非历史记录列表 = 引发主图变动的缩略图列表控制器 !== 历史记录列表控制器
+
+                                        // if (引发主图变动的缩略图列表控制器 && 引发主图变动的缩略图列表控制器 !== 历史记录列表控制器 && 引发主图变动的缩略图条目) {
+                                        //     引发主图变动的缩略图列表控制器.将某缩略图条目标记为在别处呈现图片的对应缩略图({
+                                        //         欲标记的缩略图条目: 引发主图变动的缩略图条目,
+                                        //         引发标记该缩略图条目的原因: '外界通知该缩略图列表控制器某缩略图条目对应的图片已呈现',
+                                        //     })
+                                        // }
+                                    }
+
+                                    if (引发主图变动的缩略图列表并非历史记录列表) {
+                                        const 应替换而非追加缩略图条目 = ![
+                                            '点击了切换按钮',
+                                        ].includes(主图变更原因)
+
+                                        const 如果是追加缩略图条目则追加在列表末尾 = false
+                                        // const 如果是追加缩略图条目则追加在列表末尾 = [
+                                        //     '点击了切换按钮',
+                                        // ].includes(主图变更原因)
+
+                                        历史记录列表控制器.动作集.为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目({
+                                            所涉主图条目: 已呈现的主图条目,
+                                            应替换而非追加缩略图条目,
+                                            如果是追加缩略图条目则追加在列表末尾,
+                                        })
+                                    }
+                                },
+                            },
+                        })
+
+                        历史记录列表控制器.执行一切准备工作({
+                            本实体在日志中的称谓: '历史记录列表控制器',
+                            缩略图条目数量上限: 历史记录数量上限,
+                            自定义事件之处理程序集: {
+                                当某缩略图条目删除时 (已删除的缩略图条目) {
+                                    if (已删除的缩略图条目.关联的主图条目 === 中央主图控制器.数据集.呈现的主图条目) {
+                                        中央主图控制器.动作集.变更主图({
+                                            欲呈现的主图条目: null,
+                                            主图变更原因: '某缩略图列表删除了特定图片',
+                                            主图变更原因的相关数据: null,
+                                        })
+                                    }
+                                },
+
+                                当某缩略图条目请求在别处呈现对应图片时 ({ 请求呈现对应图片的缩略图条目, 该条目被标记的原因 }) {
+                                    if (请求呈现对应图片的缩略图条目 && 该条目被标记的原因 !== '外界通知该缩略图列表控制器某缩略图条目对应的图片已呈现') {
+                                        中央主图控制器.动作集.变更主图({
+                                            欲呈现的主图条目: 请求呈现对应图片的缩略图条目.关联的主图条目,
+                                            主图变更原因: '某缩略图列表请求呈现特定图片',
+                                            主图变更原因的相关数据: {
+                                                引发主图变动的缩略图列表控制器: 历史记录列表控制器,
+                                                引发主图变动的缩略图条目: 请求呈现对应图片的缩略图条目,
+                                            },
+                                        })
+                                    }
+                                },
+                            },
+                        })
+                    },
                 },
             }
 
-            本应用.开始运行 = 本应用.开始运行.bind(本应用)
+            本应用.启动 = 本应用.启动.bind(本应用)
 
             // -------- 对外发布本应用 ---------------------------------
 
             return 本应用
         })()
 
-        window.端端的应用.开始运行()
+        window.端端的应用.启动()
     </script>
 </body>
 </html>
