@@ -239,17 +239,21 @@
             align-items: center;
             text-align: center;
             margin-bottom: 0.5em;
-            padding-right: 16em;
         }
 
+        .中央内容块 .控制面板内容块 .用于令按钮居中的辅助排版块,
         .中央内容块 .控制面板内容块 label.包裹着输入项 {
             box-sizing: border-box;
-            width: 14em;
-            margin: 0.25em 1em;
+            width: 13.25em;
+            margin: 0.25em 1.25em;
+        }
+
+        .中央内容块 .控制面板内容块 .用于令按钮居中的辅助排版块 {
+            height: 0px;
         }
 
         .中央内容块 .控制面板内容块 button {
-            display: inline-block;
+            display: block;
             width: 20em;
             padding: 0.25em 1.5em;
             margin: 0;
@@ -326,18 +330,18 @@
 
         .缩略图条目总数 {
             font-size: 0.75em;
-            position: absolute;
+            /* position: absolute;
             display: block;
             width: 8.75em;
             right: 100%;
-            top: 0;
-            margin: 1em 0;
-            padding: 0.5em 1em;
+            top: 0; */
+            margin: 0;
+            padding: 0.8em 1em 0.6em;
             line-height: 1;
-            border-radius: 1000px 0 0 1000px;
-            background-color: rgb(206, 206, 206);
+            /* border-radius: 1000px 0 0 1000px; */
+            background-color: #999;
             white-space: nowrap;
-            text-align: right;
+            text-align: center;
         }
 
         .缩略图条目总数 em {
@@ -632,7 +636,7 @@
     </style>
 
     <style>
-        @media screen and (max-width: 1100px) and (min-height: 1100px) {
+        @media screen and (max-width: 1200px) and (min-height: 1200px) {
             html { font-size: 24px; }
             article h1 { align-self: flex-start; text-align: left; }
             article .标题内容块 button { margin-right: 1em; }
@@ -681,6 +685,8 @@
                     </label>
 
                     <button id="切换按钮">点击我，可显示图片</button>
+
+                    <span class="用于令按钮居中的辅助排版块"></span>
                 </div>
 
                 <figure id="主图内容块之根" class="主图内容块之根">
