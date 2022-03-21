@@ -443,10 +443,33 @@
         }
 
         @keyframes 动画_缩略图列表条目_消亡_根 {
-            0% {
+            50% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
+            }
+
+            100% {
+                height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                background-color: transparent;
+            }
+        }
+
+        @keyframes 动画_缩略图列表条目_消亡_根_已选中 {
+            0% {
+                background-color: rgb(255, 181, 71);
+            }
+
+            50% {
+                height: 8em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+            }
+
+            75% {
+                background-color: transparent;
             }
 
             100% {
@@ -474,12 +497,12 @@
             animation-name: 动画_缩略图列表条目_诞生_根;
             animation-timing-function: ease-out;
             animation-duration: 0.79s;
-            transition: none;
+            animation-fill-mode: backwards;
         }
 
-        .缩略图列表 > li.该条目是替换旧条目而加入的 {
+        /* .缩略图列表 > li.该条目是替换旧条目而加入的 {
             animation-name: none;
-        }
+        } */
 
         .缩略图列表 > li .中央容器 {
             animation-name: 动画_缩略图列表条目_诞生_中央容器;
@@ -492,15 +515,20 @@
         .缩略图列表 > li.该条目正在消亡 {
             animation-name: 动画_缩略图列表条目_消亡_根;
             animation-timing-function: ease-out;
-            animation-delay: 0.19s;
-            animation-duration: 0.219s;
+            /* animation-delay: 0.15s; */
+            animation-duration: 0.51s;
             animation-fill-mode: backwards;
+        }
+
+        .缩略图列表 > li.该条目正在消亡.已选中 {
+            animation-name: 动画_缩略图列表条目_消亡_根_已选中;
         }
 
         .缩略图列表 > li.该条目正在消亡 .中央容器 {
             animation-name: 动画_缩略图列表条目_消亡_中央容器;
             animation-timing-function: ease-out;
             animation-duration: 0.219s;
+            animation-fill-mode: backwards;
         }
 
         .缩略图列表 > li .图像 {
@@ -2244,18 +2272,18 @@
                         const { classList } = 所涉根元素
 
                         const 样式类名_正在消亡 = '该条目正在消亡'
-                        const 样式类名_1 = '已选中'
-                        const 样式类名_2 = '对应图片已在别处呈现'
+                        // const 条目根元素之选中状态之样式表类名_甲 = '已选中'
+                        const 条目根元素之选中状态之样式表类名_乙 = '对应图片已在别处呈现'
 
                         let 已经消亡 = false
                         let 定时器编号 = NaN
 
-                        if (classList.contains(样式类名_1)) {
-                            classList.remove(样式类名_1)
-                        }
+                        // if (classList.contains(条目根元素之选中状态之样式表类名_甲)) {
+                        //     classList.remove(条目根元素之选中状态之样式表类名_甲)
+                        // }
 
-                        if (classList.contains(样式类名_2)) {
-                            classList.remove(样式类名_2)
+                        if (classList.contains(条目根元素之选中状态之样式表类名_乙)) {
+                            classList.remove(条目根元素之选中状态之样式表类名_乙)
                         }
 
                         if (!classList.contains(样式类名_正在消亡)) {
