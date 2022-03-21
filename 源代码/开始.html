@@ -494,7 +494,7 @@
         .缩略图列表 > li.该条目是新创建的 {
             animation-name: 动画_缩略图列表条目_诞生_根;
             animation-timing-function: ease-out;
-            animation-duration: 0.79s;
+            animation-duration: 0.67s;
             animation-fill-mode: both;
         }
 
@@ -502,7 +502,7 @@
         .缩略图列表 > li.该条目是新创建的 .中央容器 {
             animation-name: 动画_缩略图列表条目_诞生_中央容器;
             animation-timing-function: ease-out;
-            animation-delay: 0.27s;
+            animation-delay: 0.28s;
             animation-duration: 0.319s;
             animation-fill-mode: both;
         }
@@ -516,7 +516,8 @@
         }
 
         .缩略图列表 > li.该条目是为替换旧条目而加入的 .中央容器 {
-            animation-delay: 0.15s;
+            animation-delay: 0.12s;
+            animation-duration: 0.219;
         }
 
         /* * * * * * * * * * * * * * * * * * * * * * */
@@ -570,8 +571,8 @@
         .缩略图列表 > li.该条目正在消亡 {
             animation-name: 动画_缩略图列表条目_消亡_根;
             animation-timing-function: ease-in-out;
-            animation-delay: 0.219s;
-            animation-duration: 0.515s;
+            animation-delay: 0.28s;
+            animation-duration: 0.36s;
             animation-fill-mode: both;
         }
 
@@ -586,10 +587,14 @@
             animation-fill-mode: both;
         }
 
-        .缩略图列表 > li.该条目是正被替换掉的 {
+        .缩略图列表 > li.该条目正在消亡.该条目是正被替换掉的 {
             animation-name: none;
             z-index: 10;
             margin-top: -8em;
+        }
+
+        .缩略图列表 > li.该条目正在消亡.该条目是正被替换掉的 .中央容器 {
+            animation-duration: 0.219s;
         }
 
         /* * * * * * * * * * * * * * * * * * * * * * */
@@ -2561,13 +2566,22 @@
                                 if (应替换掉旧缩略图条目) {
                                     动作集.$删除某缩略图条目关联的一切界面元素(缩略图条目)
 
-                                    if (旧元素.classList.contains('该条目已选中')) {
-                                        旧元素.classList.remove('该条目已选中')
-                                    }
+                                    ;[
+                                        '该条目已选中',
+                                        // '该条目是为替换旧条目而加入的',
+                                    ].forEach(样式类名 => {
+                                        if (旧元素.classList.contains(样式类名)) {
+                                            旧元素.classList.remove(样式类名)
+                                        }
+                                    })
 
-                                    if (!旧元素.classList.contains('该条目是正被替换掉的')) {
-                                        旧元素.classList.add('该条目是正被替换掉的')
-                                    }
+                                    ;[
+                                        '该条目是正被替换掉的',
+                                    ].forEach(样式类名 => {
+                                        if (!旧元素.classList.contains(样式类名)) {
+                                            旧元素.classList.add(样式类名)
+                                        }
+                                    })
 
                                     缩略图列表元素.insertBefore(新元素, 旧元素)
                                     借助样式类名为某界面元素应用一次性动画({
