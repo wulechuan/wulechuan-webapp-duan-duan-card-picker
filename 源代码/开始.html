@@ -397,7 +397,7 @@
 
         .缩略图列表 {
             margin: 0;
-            padding: 3em 0 12em;
+            padding: 4em 0 12em;
         }
 
         .缩略图列表 > li {
@@ -523,10 +523,14 @@
         /* * * * * * * * * * * * * * * * * * * * * * */
 
         @keyframes 动画_缩略图列表条目_消亡_根 {
-            0% {
+            20% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
+            }
+
+            41% {
+                background-color: transparent;
             }
 
             100% {
@@ -538,11 +542,15 @@
         }
 
         @keyframes 动画_缩略图列表条目_消亡_根_该条目已选中 {
-            0% {
+            20% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
                 background-color: rgb(255, 181, 71);
+            }
+
+            41% {
+                background-color: transparent;
             }
 
             100% {
@@ -571,8 +579,8 @@
         .缩略图列表 > li.该条目正在消亡 {
             animation-name: 动画_缩略图列表条目_消亡_根;
             animation-timing-function: ease-in-out;
-            animation-delay: 0.28s;
-            animation-duration: 0.36s;
+            animation-delay: 0s;
+            animation-duration: 0.66s;
             animation-fill-mode: both;
         }
 
