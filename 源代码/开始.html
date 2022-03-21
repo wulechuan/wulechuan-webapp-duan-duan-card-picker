@@ -167,6 +167,10 @@
             z-index: 10;
         }
 
+        .短语 {
+            display: inline-block;
+        }
+
         article {
             font-size: 0.85rem;
             box-sizing: border-box;
@@ -671,7 +675,7 @@
     <style>
         @media screen and (max-width: 1200px) and (min-height: 1200px) {
             html { font-size: 24px; }
-            article h1 { align-self: flex-start; text-align: left; }
+            article h1 { align-self: flex-start; text-align: left; padding-right: 6em; }
             article .标题内容块 button { margin-right: 1em; }
             .侧边栏.内容空白-仅用于占位 { display: none; }
             .中央内容块 .控制面板内容块 { padding-right: 0; }
@@ -696,7 +700,7 @@
         <header class="应用顶部内容块">
             <article>
                 <section class="标题内容块">
-                    <h1>吴淙渊学习的第一个程序——《切换图片》</h1>
+                    <h1><span class="短语">吴淙渊学习的</span><span class="短语">第一个程序</span><span class="短语">——《切换图片》</span></h1>
                     <button id="说明书的开关按钮" class="小尺寸">呈现说明书</button>
                 </section>
 
