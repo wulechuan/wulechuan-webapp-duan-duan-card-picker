@@ -417,11 +417,11 @@
             background-color: rgba(255, 181, 71, 0.45);
         }
 
-        .缩略图列表 > li.已选中 {
+        .缩略图列表 > li.该条目已选中 {
             background-color: rgb(255, 181, 71);
         }
 
-        .缩略图列表 > li.已选中 .中央容器 {
+        .缩略图列表 > li.该条目已选中 .中央容器 {
             animation-delay: 0.1s;
 
             border-color: rgb(255, 255, 255);
@@ -451,6 +451,8 @@
             transition-duration: 0.319s;
         }
 
+        /* * * * * * * * * * * * * * * * * * * * * * */
+
         @keyframes 动画_缩略图列表条目_诞生_根 {
             0% {
                 height: 0;
@@ -459,11 +461,14 @@
                 background-color: transparent;
             }
 
-            66% {
+            40% {
+                background-color: transparent;
+            }
+
+            60% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
-                /* background-color: transparent; */
             }
 
             100% {
@@ -484,8 +489,41 @@
             }
         }
 
+        /* * * * * * * * * * * * * * * * * * * * * * */
+
+        .缩略图列表 > li.该条目是新创建的 {
+            animation-name: 动画_缩略图列表条目_诞生_根;
+            animation-timing-function: ease-out;
+            animation-duration: 0.79s;
+            animation-fill-mode: both;
+        }
+
+        .缩略图列表 > li.该条目是重新插入文档的 .中央容器,
+        .缩略图列表 > li.该条目是新创建的 .中央容器 {
+            animation-name: 动画_缩略图列表条目_诞生_中央容器;
+            animation-timing-function: ease-out;
+            animation-delay: 0.27s;
+            animation-duration: 0.319s;
+            animation-fill-mode: both;
+        }
+
+        .缩略图列表 > li.该条目是重新插入文档的.该条目已选中 .中央容器 {
+            animation-delay: 0s;
+
+        }
+
+        /* .缩略图列表 > li.该条目是替换旧条目而加入的 {
+            animation-delay: 0.45s;
+        }
+
+        .缩略图列表 > li.该条目是替换旧条目而加入的 .中央容器 {
+            animation-delay: 0.72s;
+        } */
+
+        /* * * * * * * * * * * * * * * * * * * * * * */
+
         @keyframes 动画_缩略图列表条目_消亡_根 {
-            50% {
+            0% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
@@ -499,19 +537,12 @@
             }
         }
 
-        @keyframes 动画_缩略图列表条目_消亡_根_已选中 {
+        @keyframes 动画_缩略图列表条目_消亡_根_该条目已选中 {
             0% {
-                background-color: rgb(255, 181, 71);
-            }
-
-            50% {
                 height: 8em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
-            }
-
-            75% {
-                background-color: transparent;
+                background-color: rgb(255, 181, 71);
             }
 
             100% {
@@ -535,43 +566,28 @@
             }
         }
 
-        .缩略图列表 > li.该条目是新创建的 {
-            animation-name: 动画_缩略图列表条目_诞生_根;
-            animation-timing-function: ease-out;
-            animation-duration: 0.79s;
-            animation-fill-mode: backwards;
-        }
-
-        /* .缩略图列表 > li.该条目是替换旧条目而加入的 {
-            animation-name: none;
-        } */
-
-        .缩略图列表 > li .中央容器 {
-            animation-name: 动画_缩略图列表条目_诞生_中央容器;
-            animation-timing-function: ease-out;
-            animation-delay: 0.19s;
-            animation-duration: 0.16s;
-            animation-fill-mode: backwards;
-        }
+        /* * * * * * * * * * * * * * * * * * * * * * */
 
         .缩略图列表 > li.该条目正在消亡 {
             animation-name: 动画_缩略图列表条目_消亡_根;
-            animation-timing-function: ease-out;
-            /* animation-delay: 0.15s; */
-            animation-duration: 0.51s;
-            animation-fill-mode: backwards;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0.219s;
+            animation-duration: 0.515s;
+            animation-fill-mode: both;
         }
 
-        .缩略图列表 > li.该条目正在消亡.已选中 {
-            animation-name: 动画_缩略图列表条目_消亡_根_已选中;
+        .缩略图列表 > li.该条目正在消亡.该条目已选中 {
+            animation-name: 动画_缩略图列表条目_消亡_根_该条目已选中;
         }
 
         .缩略图列表 > li.该条目正在消亡 .中央容器 {
             animation-name: 动画_缩略图列表条目_消亡_中央容器;
-            animation-timing-function: ease-out;
-            animation-duration: 0.219s;
-            animation-fill-mode: backwards;
+            animation-timing-function: ease-in;
+            animation-duration: 0.319s;
+            animation-fill-mode: both;
         }
+
+        /* * * * * * * * * * * * * * * * * * * * * * */
 
         .缩略图列表 > li .图像 {
             display: block;
@@ -661,13 +677,13 @@
             border-radius: 0.5em;
         }
 
-        .缩略图列表.已有选中的条目 > li.未选中 .交换两条目位置之功能面板 {
+        .缩略图列表.已有选中的条目 > li.该条目未选中 .交换两条目位置之功能面板 {
             /* display: flex; */
             height: 1em;
             padding: 0.5em;
         }
 
-        .缩略图列表.已有选中的条目 > li.未选中:hover .交换两条目位置之功能面板 {
+        .缩略图列表.已有选中的条目 > li.该条目未选中:hover .交换两条目位置之功能面板 {
             /* display: flex; */
             height: 4.5em;
         }
@@ -1127,6 +1143,125 @@
                 为成批的函数绑定_this_对象(本实体在日志中的称谓, 欲绑定的_this_对象, $自定义事件之处理程序之集, null)
 
                 为某实体挂接所有的标准事件处理程序(欲对其操作的实体对象)
+            }
+
+            /**
+             * @param {object} argument0
+             * @param {?Element} argument0.所涉界面元素
+             * @param {?string[]} argument0.所以应用动画的样式类名列表
+             * @param {?number} argument0.预估动画延时及播放之总秒数 单位：秒
+             * @param {?boolean} argument0.应启用调试信息
+             * @param {?(所涉界面元素: Element) => void} argument0.当动画结束时
+             */
+            function 借助样式类名为某界面元素应用一次性动画 ({
+                所涉界面元素,
+                所以应用动画的样式类名列表,
+                预估动画延时及播放之总秒数,
+                当动画结束时,
+                应启用调试信息,
+            } = {}) {
+                const 日志前缀 = '借助样式类名为某界面元素应用一次性动画：'
+
+                if (!(所涉界面元素 instanceof Element)) {
+                    console.warn(`${日志前缀} 界面元素不合规。`)
+                    return
+                }
+
+                if (!Array.isArray(所以应用动画的样式类名列表)) {
+                    所以应用动画的样式类名列表 = [ 所以应用动画的样式类名列表 ]
+                }
+
+                所以应用动画的样式类名列表 = 所以应用动画的样式类名列表.filter(成员 => {
+                    return typeof 成员 === 'string' && !!成员.trim()
+                })
+
+                if (所以应用动画的样式类名列表.length === 0) {
+                    console.warn(`${日志前缀} 没有给出任何有效的样式类名。`)
+                    return
+                }
+
+                const { classList } = 所涉界面元素
+
+                所以应用动画的样式类名列表 = 所以应用动画的样式类名列表.filter(样式类名 => {
+                    return !classList.contains(样式类名)
+                })
+
+                if (所以应用动画的样式类名列表.length === 0) {
+                    console.warn(`${日志前缀} 所有给出的样式类名早已应用于给定的界面元素，故不可能引发新的动画。`)
+                    return
+                }
+
+                if (typeof 预估动画延时及播放之总秒数 !== 'number') {
+                    预估动画延时及播放之总秒数 = 0
+                }
+
+                if (!(预估动画延时及播放之总秒数 > 0.02)) {
+                    console.warn(`${日志前缀} 给出的参数未能有效配置作为后备方案的定时器。已强制采用 3 秒的定时器。`)
+                    预估动画延时及播放之总秒数 = 3
+                }
+
+
+                let 作为后备方案的定时器之编号 = NaN
+                let 已善后 = false
+
+                所以应用动画的样式类名列表.forEach(样式类名 => classList.add(样式类名))
+
+                所涉界面元素.addEventListener(
+                    'animationend',
+                    _当动画结束时
+                )
+
+                作为后备方案的定时器之编号 = setTimeout(
+                    _当动画结束时,
+                    预估动画延时及播放之总秒数 * 1000
+                )
+
+                /**
+                 * @param {AnimationEvent | undefined} 或事件或未定义
+                 */
+                function _当动画结束时 (或事件或未定义) {
+                    if (或事件或未定义 instanceof AnimationEvent) {
+                        const 动画播放完毕的界面元素 = 或事件或未定义.target
+
+                        if (应启用调试信息) {
+                            console.debug(`${日志前缀} 动画播放完毕的界面元素：`, 动画播放完毕的界面元素)
+                        }
+
+                        if (动画播放完毕的界面元素 !== 所涉界面元素) {
+                            // 系内层子孙元素的动画播放完毕。
+                            return
+                        }
+                    }
+
+                    if (应启用调试信息) {
+                        console.debug(
+                            `${日志前缀} _当动画结束时()`,
+                            '\n\t 或事件或定时秒数：', !或事件或未定义 ? `${预估动画延时及播放之总秒数} 秒` : 或事件或未定义.constructor.name,
+                            '\n\t 所涉界面元素：', 所涉界面元素,
+                            '\n\t 样式类名列表：', `"${所以应用动画的样式类名列表.join('", "')}"`
+                        )
+                    }
+
+                    if (已善后) { return }
+
+                    所以应用动画的样式类名列表.forEach(样式类名 => classList.remove(样式类名))
+
+                    所涉界面元素.removeEventListener('animationend', _当动画结束时)
+                    if (作为后备方案的定时器之编号) {
+                        clearTimeout(作为后备方案的定时器之编号)
+                        作为后备方案的定时器之编号 = NaN
+                    }
+
+                    已善后 = true
+
+                    if (typeof 当动画结束时 === 'function') {
+                        if (应启用调试信息) {
+                            console.debug(`\t${日志前缀} 回调：当动画结束时()`)
+                        }
+
+                        当动画结束时(所涉界面元素)
+                    }
+                }
             }
 
             // -------- 控制器定义 ---------------------------------
@@ -2013,8 +2148,17 @@
              * @property {(this: T_缩略图列表控制器) => void} 动作集.$确保缩略图条目总数不超越限度
              * @property {(this: T_缩略图列表控制器) => void} 动作集.$更新界面中的历史记录总数值
              *
-             * @property {(this: T_缩略图列表控制器, 关联的主图条目?: T_主图条目) => null | T_缩略图条目} 动作集.$根据主图条目创建对应的缩略图条目
-             * @property {(this: T_缩略图列表控制器, 主图条目?: T_主图条目) => HTMLLIElement} 动作集.$根据给出的主图条目为其对应的缩略图条目创建一切元素
+             * @property {(
+             *     this: T_缩略图列表控制器,
+             *     关联的主图条目?: T_主图条目,
+             *     应免去入场动画?: boolean
+             * ) => null | T_缩略图条目} 动作集.$根据主图条目创建对应的缩略图条目
+             *
+             * @property {(
+             *     this: T_缩略图列表控制器,
+             *     主图条目?: T_主图条目,
+             *     应免去入场动画?: boolean
+             * ) => HTMLLIElement} 动作集.$根据给出的主图条目为其对应的缩略图条目创建一切元素
              *
              * @property {(this: T_缩略图列表控制器, 欲删除的缩略图条目?: T_缩略图条目) => void} 动作集.删除某缩略图条目
              * @property {(this: T_缩略图列表控制器, 所涉缩略图条目?: T_缩略图条目) => void} 动作集.$删除某缩略图条目关联的一切界面元素
@@ -2023,6 +2167,7 @@
              *     所涉主图条目?: T_主图条目;
              *     应替换而非追加缩略图条目?: boolean;
              *     如果是追加缩略图条目则追加在列表末尾?: boolean;
+             *     应免去入场动画?: boolean;
              * }) => void} 动作集.为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目 ~ 参数 `如果是追加缩略图条目则追加在列表末尾` 若为 false ，则在当前选中的缩略图条目之后插入新的缩略图条目。
              *
              * @property {(
@@ -2162,15 +2307,18 @@
 
                     /**
                      * @this {T_缩略图列表控制器}
-                     * @param {T_主图条目} 关联的主图条目
+                     *
+                     * @param {?T_主图条目} 关联的主图条目
+                     * @param {?boolean} 应免去入场动画
+                     *
                      * @returns {null | T_缩略图条目}
                      */
-                    $根据主图条目创建对应的缩略图条目 (关联的主图条目) {
+                    $根据主图条目创建对应的缩略图条目 (关联的主图条目, 应免去入场动画) {
                         if (!关联的主图条目) { return null }
 
                         const { 动作集 } = this
 
-                        const 界面根元素 = 动作集.$根据给出的主图条目为其对应的缩略图条目创建一切元素(关联的主图条目)
+                        const 界面根元素 = 动作集.$根据给出的主图条目为其对应的缩略图条目创建一切元素(关联的主图条目, 应免去入场动画)
                         if (!界面根元素) { return null }
 
                         /** @type {T_缩略图条目} */
@@ -2186,9 +2334,10 @@
 
                     /**
                      * @this {T_缩略图列表控制器}
-                     * @param {T_主图条目} 主图条目
+                     * @param {?T_主图条目} 主图条目
+                     * @param {?boolean} 应免去入场动画
                      */
-                    $根据给出的主图条目为其对应的缩略图条目创建一切元素 (主图条目) {
+                    $根据给出的主图条目为其对应的缩略图条目创建一切元素 (主图条目, 应免去入场动画) {
                         if (!主图条目) {
                             throw new TypeError(`${this.本实体在日志中的称谓}：创建【缩略图条目】之【界面元素】时，未给出相关的【主图条目】作为依据。`)
                             // return null
@@ -2237,11 +2386,14 @@
 
                         根元素.appendChild(中央容器元素)
 
-                        const 根元素系新创建的标记之样式类名 = '该条目是新创建的'
-                        根元素.classList.add(根元素系新创建的标记之样式类名)
-                        setTimeout(() => {
-                            根元素.classList.remove(根元素系新创建的标记之样式类名)
-                        }, 0.5 * 1000)
+                        if (!应免去入场动画) {
+                            借助样式类名为某界面元素应用一次性动画({
+                                所涉界面元素: 根元素,
+                                所以应用动画的样式类名列表: [ '该条目是新创建的' ],
+                                预估动画延时及播放之总秒数: 1,
+                                当动画结束时: null,
+                            })
+                        }
 
                         return 根元素
                     },
@@ -2315,12 +2467,8 @@
                         const 所涉根元素 = 所涉缩略图条目.界面根元素
                         const { classList } = 所涉根元素
 
-                        const 样式类名_正在消亡 = '该条目正在消亡'
-                        // const 条目根元素之选中状态之样式表类名_甲 = '已选中'
+                        // const 条目根元素之选中状态之样式表类名_甲 = '该条目已选中'
                         const 条目根元素之选中状态之样式表类名_乙 = '对应图片已在别处呈现'
-
-                        let 已经消亡 = false
-                        let 定时器编号 = NaN
 
                         // if (classList.contains(条目根元素之选中状态之样式表类名_甲)) {
                         //     classList.remove(条目根元素之选中状态之样式表类名_甲)
@@ -2330,28 +2478,13 @@
                             classList.remove(条目根元素之选中状态之样式表类名_乙)
                         }
 
-                        if (!classList.contains(样式类名_正在消亡)) {
-                            classList.add(样式类名_正在消亡)
-
-                            所涉根元素.addEventListener('animationend', 消亡善后)
-                            定时器编号 = setTimeout(消亡善后, 0.6 * 1000)
-                        }
-
-                        function 消亡善后 (或事件或空) {
-                            // console.debug('消亡善后', 或事件或空)
-
-                            if (已经消亡) { return }
-
-                            // classList.remove(样式类名_正在消亡)
-
-                            所涉根元素.removeEventListener('animationend', 消亡善后)
-                            if (定时器编号) { clearTimeout(定时器编号) }
-
-                            所涉根元素.parentElement.removeChild(所涉根元素)
-
-                            定时器编号 = NaN
-                            已经消亡 = true
-                        }
+                        借助样式类名为某界面元素应用一次性动画({
+                            应启用调试信息: false,
+                            所涉界面元素: 所涉根元素,
+                            所以应用动画的样式类名列表: [ '该条目正在消亡' ],
+                            预估动画延时及播放之总秒数: 1,
+                            当动画结束时 () { 所涉根元素.parentElement.removeChild(所涉根元素) },
+                        })
                     },
 
                     /**
@@ -2360,11 +2493,17 @@
                      * @param {?T_主图条目} argument0.所涉主图条目
                      * @param {?boolean} argument0.应替换而非追加缩略图条目
                      * @param {?boolean} argument0.如果是追加缩略图条目则追加在列表末尾 否则在当前选中的缩略图条目之后插入新的缩略图条目
+                     * @param {?boolean} argument0.应免去入场动画
                      */
-                    为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目 ({ 所涉主图条目, 应替换而非追加缩略图条目, 如果是追加缩略图条目则追加在列表末尾 } = {}) {
+                    为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目 ({
+                        所涉主图条目,
+                        应替换而非追加缩略图条目,
+                        如果是追加缩略图条目则追加在列表末尾,
+                        应免去入场动画,
+                    } = {}) {
                         const { 数据集, 动作集 } = this
 
-                        const 新缩略图条目 = 动作集.$根据主图条目创建对应的缩略图条目(所涉主图条目)
+                        const 新缩略图条目 = 动作集.$根据主图条目创建对应的缩略图条目(所涉主图条目, 应免去入场动画)
 
                         if (新缩略图条目) {
 
@@ -2414,18 +2553,20 @@
                                 const 旧元素 = 旧缩略图条目.界面根元素
                                 const 新元素 = 新缩略图条目.界面根元素
 
-                                缩略图列表元素.insertBefore(新元素, 旧元素)
-
                                 if (应替换掉旧缩略图条目) {
-                                    const 新元素系替换旧元素之标记之样式类名 = '该条目是替换旧条目而加入的'
-                                    新元素.classList.add(新元素系替换旧元素之标记之样式类名)
+                                    动作集.$删除某缩略图条目关联的一切界面元素(缩略图条目)
 
                                     setTimeout(() => {
-                                        新元素.classList.remove(新元素系替换旧元素之标记之样式类名)
-                                    }, 0.5 * 1000)
-
-                                    动作集.$删除某缩略图条目关联的一切界面元素(缩略图条目)
+                                        缩略图列表元素.insertBefore(新元素, 旧元素)
+                                        借助样式类名为某界面元素应用一次性动画({
+                                            所涉界面元素: 新元素,
+                                            所以应用动画的样式类名列表: [ '该条目是替换旧条目而加入的' ],
+                                            预估动画延时及播放之总秒数: 1,
+                                            当动画结束时: null,
+                                        })
+                                    }, 0.45 * 1000)
                                 } else {
+                                    缩略图列表元素.insertBefore(新元素, 旧元素)
                                     缩略图条目之新列表.push(缩略图条目)
                                 }
                             }
@@ -2522,8 +2663,8 @@
 
                         // console.debug(`${this.本实体在日志中的称谓}：$选中某缩略图条目`, '\n\t 原因：', 缩略图选中标记变更之原因, '\n\t 缩略图：', 欲选中的缩略图条目)
 
-                        const 条目根元素之选中状态之样式表类名_甲 = '已选中'
-                        const 条目根元素之选中状态之样式表类名_乙 = '未选中'
+                        const 条目根元素之选中状态之样式表类名_甲 = '该条目已选中'
+                        const 条目根元素之选中状态之样式表类名_乙 = '该条目未选中'
 
                         /** @type {null | T_缩略图条目} */
                         let 将选中的缩略图条目 = null
@@ -2622,10 +2763,22 @@
                         const { 缩略图列表元素 } = this.$界面元素集
 
                         缩略图列表元素.insertBefore(界面根元素一, 界面根元素二之前的相邻元素)
-                        缩略图列表元素.insertBefore(界面根元素二, 界面根元素一之前的相邻元素)
-
                         缩略图条目之列表[缩略图条目一的旧列表编号] = 参与交换的第二个缩略图条目
+                        借助样式类名为某界面元素应用一次性动画({
+                            所涉界面元素: 界面根元素一,
+                            所以应用动画的样式类名列表: [ '该条目是重新插入文档的' ],
+                            预估动画延时及播放之总秒数: 1,
+                            当动画结束时: null,
+                        })
+
+                        缩略图列表元素.insertBefore(界面根元素二, 界面根元素一之前的相邻元素)
                         缩略图条目之列表[缩略图条目二的旧列表编号] = 参与交换的第一个缩略图条目
+                        借助样式类名为某界面元素应用一次性动画({
+                            所涉界面元素: 界面根元素二,
+                            所以应用动画的样式类名列表: [ '该条目是重新插入文档的' ],
+                            预估动画延时及播放之总秒数: 1,
+                            当动画结束时: null,
+                        })
                     },
                 },
 
@@ -2811,12 +2964,13 @@
                         历史记录列表控制器,
                     } = 部件集
 
-                    const 历史记录列表控制器所有初始条目应关联的主图条目 = new Array(0).fill(null).map(主图条目候选列表控制器.动作集.随机选取一个条目)
+                    const 历史记录列表控制器所有初始条目应关联的主图条目 = new Array(7).fill(null).map(主图条目候选列表控制器.动作集.随机选取一个条目)
                     历史记录列表控制器所有初始条目应关联的主图条目.forEach(主图条目 => {
                         历史记录列表控制器.动作集.为主图条目构建新的缩略图条目并将新缩略图添加到某旧条目之后或替换掉该旧条目({
                             所涉主图条目: 主图条目,
                             应替换而非追加缩略图条目: false,
                             如果是追加缩略图条目则追加在列表末尾: true,
+                            应免去入场动画: true,
                         })
                     })
                 },
