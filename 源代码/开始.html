@@ -379,6 +379,17 @@
             background-color: rgb(255, 181, 71);
         }
 
+        .缩略图列表 > li.已选中 .中央容器 {
+            animation-delay: 0.1s;
+
+            border-color: rgb(255, 255, 255);
+            box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.45);
+        }
+
+        .缩略图列表 > li:hover .中央容器 {
+            border-color: rgb(67, 241, 32);
+        }
+
         .缩略图列表 > li .中央容器 {
             display: block;
             box-sizing: border-box;
@@ -490,17 +501,6 @@
             animation-name: 动画_缩略图列表条目_消亡_中央容器;
             animation-timing-function: ease-out;
             animation-duration: 0.219s;
-        }
-
-        .缩略图列表 > li.已选中 .中央容器 {
-            animation-delay: 0.1s;
-
-            border-color: rgb(255, 255, 255);
-            box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.45);
-        }
-
-        .缩略图列表 > li:hover .中央容器 {
-            border-color: rgb(67, 241, 32);
         }
 
         .缩略图列表 > li .图像 {
@@ -2244,9 +2244,19 @@
                         const { classList } = 所涉根元素
 
                         const 样式类名_正在消亡 = '该条目正在消亡'
+                        const 样式类名_1 = '已选中'
+                        const 样式类名_2 = '对应图片已在别处呈现'
 
                         let 已经消亡 = false
                         let 定时器编号 = NaN
+
+                        if (classList.contains(样式类名_1)) {
+                            classList.remove(样式类名_1)
+                        }
+
+                        if (classList.contains(样式类名_2)) {
+                            classList.remove(样式类名_2)
+                        }
 
                         if (!classList.contains(样式类名_正在消亡)) {
                             classList.add(样式类名_正在消亡)
