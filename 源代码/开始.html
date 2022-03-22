@@ -728,6 +728,15 @@
             .主图内容块之根 .主图容器 { width: 100%;}
         }
 
+        @media screen and (max-width: 800px) and (min-height: 900px) {
+            html { font-size: 20px; }
+            article h1 { align-self: flex-start; text-align: left; padding-right: 6em; }
+            .应用顶部内容块 button { margin-right: 1em; }
+            .侧边栏.内容空白-仅用于占位 { display: none; }
+            .中央内容块 .控制面板内容块 { padding-right: 0; }
+            .主图内容块之根 .主图容器 { width: 100%;}
+        }
+
         @media screen and (min-width: 1930px) {
             html { font-size: 24px; }
         }
@@ -757,7 +766,7 @@
 
             <button id="说明书的开关按钮" class="小尺寸">呈现说明书</button>
 
-            <div class="窗口尺寸信息"><span>窗口尺寸（单位：虚拟分辨率）：</span><em id="窗口尺寸-宽"></em>×<em id="窗口尺寸-高"></em></div>
+            <!-- <div class="窗口尺寸信息"><span>窗口尺寸（单位：虚拟分辨率）：</span><em id="窗口尺寸-宽"></em>×<em id="窗口尺寸-高"></em></div> -->
         </header>
 
         <section class="应用主体内容块">
@@ -3084,6 +3093,10 @@
                             窗口尺寸元素_宽,
                             窗口尺寸元素_高,
                         } = this.$界面元素集
+
+                        if (!窗口尺寸元素_宽 || !窗口尺寸元素_高) {
+                            return
+                        }
 
                         window.onresize = () => 更新窗口尺寸信息()
 
