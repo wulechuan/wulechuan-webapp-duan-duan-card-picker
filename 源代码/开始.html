@@ -253,18 +253,51 @@
             text-indent: 2em;
         }
 
-        .调试工具面板 {
-            font-size: 0.5em;
+        .调试工具 {
+            font-size: 0.75em;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .调试工具 .调试工具面板开关按钮 {
+            font-size: inherit;
+            z-index: 10;
+
+            display: block;
             box-sizing: border-box;
             position: absolute;
             top: 0;
             left: 0;
-            padding: 1em 2em;
+            margin: 1em 1.75em;
+            width: 10em;
+        }
+
+        .调试工具面板 {
+            z-index: 1;
+
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 5em 0.5em 0.5em;
             width: 60%;
             max-width: 750px;
+            max-height: 100%;
 
             color: #e99;
             background-color: #200d;
+        }
+
+        .调试工具面板内容 {
+            max-height: 100%;
+            padding: 3em 2em 5em;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .调试工具面板 p {
@@ -371,6 +404,7 @@
             width: 100%;
             padding: 0;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             background-color: #eee;
         }
 
@@ -442,6 +476,7 @@
             width: 100%;
             height: 100%;
             overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
         }
 
         .缩略图列表 {
@@ -804,18 +839,24 @@
 
             <button id="说明书的开关按钮" class="小尺寸">呈现说明书</button>
 
-            <div id="调试工具面板" class="调试工具面板" style="display: none;">
-                <dl id="调试工具面板字典表">
-                    <div class="字典表条目 用户代理之特征文字">
-                        <dt>用户代理之特征文字：</dt>
-                        <dd><em id="用户代理之特征文字"></em></dd>
-                    </div>
+            <div class="调试工具">
+                <button id="调试工具面板开关按钮" class="调试工具面板开关按钮">呈现调试信息</button>
 
-                    <div class="字典表条目 窗口尺寸信息">
-                        <dt>窗口尺寸（单位：虚拟像素）：</dt>
-                        <dd><em id="窗口尺寸-宽"></em>×<em id="窗口尺寸-高"></em></dd>
+                <div id="调试工具面板" class="调试工具面板" style="display: none;">
+                    <div class="调试工具面板内容">
+                        <dl id="调试工具面板字典表">
+                            <div class="字典表条目 用户代理之特征文字">
+                                <dt>用户代理之特征文字：</dt>
+                                <dd><em id="用户代理之特征文字"></em></dd>
+                            </div>
+    
+                            <div class="字典表条目 窗口尺寸信息">
+                                <dt>窗口尺寸（单位：虚拟像素）：</dt>
+                                <dd><em id="窗口尺寸-宽"></em>×<em id="窗口尺寸-高"></em></dd>
+                            </div>
+                        </dl>
                     </div>
-                </dl>
+                </div>
             </div>
         </header>
 
@@ -881,7 +922,8 @@
             const 图片典型命中概率宽度_4级 = 79
 
             const 所有图片文件之公共路径_标准 = './图片资源/'
-            const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'file:///android_assets/Documents/圣斗士卡片选择/图片资源/'
+            // const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'file:///android_assets/Documents/圣斗士卡片选择/图片资源/'
+            const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'content://com.android.htmlfileprovider/Documents/圣斗士卡片选择/图片资源/'
 
             /**
              * @typedef {(
@@ -1455,6 +1497,7 @@
 
                 $界面元素集: {
                     调试工具面板元素: 查找元素('#调试工具面板'),
+                    调试工具面板开关按钮元素: 查找元素('#调试工具面板开关按钮'),
                     调试工具面板字典表根元素: 查找元素('#调试工具面板字典表'),
                     用以呈现用户代理之特征文字之元素: 查找元素('#用户代理之特征文字'),
                     用以呈现窗口宽之元素: 查找元素('#窗口尺寸-宽'),
@@ -1582,15 +1625,25 @@
                         const { 数据集: { $调试工具面板已呈现 }, $界面元素集: { 调试工具面板元素 } } = this
 
                         if ($调试工具面板已呈现) {
-                            调试工具面板元素.style.opacity = ''
+                            调试工具面板元素.style.display = ''
                         } else {
-                            调试工具面板元素.style.opacity = '0'
+                            调试工具面板元素.style.display = 'none'
                         }
                     },
                 },
 
                 $标准事件之处理程序之集: {
-                    调试工具面板元素: {
+                    // 调试工具面板元素: {
+                    //     /**
+                    //      * @this {T_调试工具面板控制器}
+                    //      * @param {PointerEvent} 事件
+                    //      */
+                    //     onclick (事件) {
+                    //         this.动作集.呈现或收起调试工具面板(false)
+                    //     },
+                    // },
+
+                    调试工具面板开关按钮元素: {
                         /**
                          * @this {T_调试工具面板控制器}
                          * @param {PointerEvent} 事件
