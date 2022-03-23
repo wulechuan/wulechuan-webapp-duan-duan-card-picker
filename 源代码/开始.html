@@ -1509,6 +1509,7 @@
                         看似并非经典计算机设备: false,
                         设备屏幕可触控: false,
                         浏览器运行在安卓平台: false,
+                        浏览器运行在IOS平台: false,
                         用户代理之特征文字_匹配了_touch: false,
                         用户代理之特征文字_匹配了_android: false,
                         用户代理之特征文字_匹配了_HeyTapBrowser: false,
@@ -3312,6 +3313,7 @@
              * @property {boolean} 看似并非经典计算机设备
              * @property {boolean} 设备屏幕可触控
              * @property {boolean} 浏览器运行在安卓平台
+             * @property {boolean} 浏览器运行在IOS平台
              * @property {boolean} 用户代理之特征文字_匹配了_touch
              * @property {boolean} 用户代理之特征文字了_匹配_android
              * @property {boolean} 用户代理之特征文字_匹配了_HeyTapBrowser
@@ -3497,8 +3499,7 @@
                             用户代理之特征文字_匹配了_EdgA,
                         ].some(匹配结果 => !!匹配结果)
 
-                        const 浏览器运行在IOS平台 = [
-                        ].some(因素成立 => !!因素成立)
+                        const 浏览器运行在IOS平台 = false // 本网页应用永不可能支持 IOS 平台。
 
                         const 看似并非经典计算机设备 = [
                             浏览器运行在安卓平台,
@@ -3527,6 +3528,7 @@
                         调试信息集.看似并非经典计算机设备 = 看似并非经典计算机设备
                         调试信息集.设备屏幕可触控 = 设备屏幕可触控
                         调试信息集.浏览器运行在安卓平台 = 浏览器运行在安卓平台
+                        调试信息集.浏览器运行在IOS平台 = 浏览器运行在IOS平台
                         调试信息集.用户代理之特征文字_匹配了_touch = 用户代理之特征文字_匹配了_touch
                         调试信息集.用户代理之特征文字_匹配了_android = 用户代理之特征文字_匹配了_android
                         调试信息集.用户代理之特征文字_匹配了_HeyTapBrowser = 用户代理之特征文字_匹配了_HeyTapBrowser
