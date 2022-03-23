@@ -793,22 +793,36 @@
     </style>
 
     <style>
-        @media screen and (max-width: 1200px) and (min-height: 1200px) {
-            html { font-size: 24px; }
+        @media screen and (max-width: 1200px) and (max-height: 2000px) {
             .应用顶部内容块 button { margin-right: 1em; }
-            .应用说明内容块 h1 { align-self: flex-start; text-align: left; padding-right: 6em; }
+            .应用说明内容块 h1 { align-self: flex-start; text-align: left; padding-left: 7em; padding-right: 6em; }
             .侧边栏.内容空白-仅用于占位 { display: none; }
             .中央内容块 .控制面板内容块 { padding-right: 0; }
             .主图内容块之根 .主图容器 { width: 100%;}
         }
 
-        @media screen and (max-width: 800px) and (min-height: 900px) {
+        @media screen and (max-width: 1200px) and (min-height: 1200px) and (max-height: 2000px) {
+            html { font-size: 24px; }
+        }
+
+        @media screen and (max-width: 800px) and (max-height: 1300px) {
             html { font-size: 16px; }
-            .应用顶部内容块 button { margin-right: 1em; }
-            .应用说明内容块 h1 { align-self: flex-start; text-align: left; padding-right: 6em; }
-            .侧边栏.内容空白-仅用于占位 { display: none; }
-            .中央内容块 .控制面板内容块 { padding-right: 0; }
-            .主图内容块之根 .主图容器 { width: 100%;}
+        }
+
+        @media screen and (max-width: 400px) and (max-height: 800px) {
+            html { font-size: 10px; }
+            .调试工具面板 {
+                color: #9e9;
+                background-color: #020d;
+            }
+        }
+
+        @media screen and (max-width: 800px) and (max-height: 400px) {
+            html { font-size: 10px; }
+            .调试工具面板 {
+                color: #9e9;
+                background-color: #020d;
+            }
         }
 
         @media screen and (min-width: 1930px) {
@@ -923,8 +937,9 @@
             const 图片典型命中概率宽度_4级 = 79
 
             const 所有图片文件之公共路径_标准 = './图片资源/'
-            // const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'file:///android_assets/Documents/圣斗士卡片选择/图片资源/'
-            const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'content://com.android.htmlfileprovider/Documents/圣斗士卡片选择/图片资源/'
+            // const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'file:///android_assets/Documents/圣斗士卡片选择程序/图片资源/'
+            // const 所有图片文件之公共路径_安卓操作系统的文件系统 = 'content://com.android.htmlfileprovider/Documents/圣斗士卡片选择程序/图片资源/'
+            const 所有图片文件之公共路径_安卓操作系统的文件系统 = './图片资源/'
 
             /**
              * @typedef {(
@@ -1491,8 +1506,13 @@
                     $调试工具面板已呈现: false,
                     $调试信息集: {
                         所有图片文件之公共路径: '',
+                        看似并非经典计算机设备: false,
+                        设备屏幕可触控: false,
+                        浏览器运行在安卓平台: false,
+                        用户代理之特征文字_匹配了_touch: false,
                         用户代理之特征文字_匹配了_android: false,
                         用户代理之特征文字_匹配了_HeyTapBrowser: false,
+                        用户代理之特征文字_匹配了_EdgA: false,
                     },
                 },
 
@@ -3295,6 +3315,7 @@
              * @property {boolean} 用户代理之特征文字_匹配了_touch
              * @property {boolean} 用户代理之特征文字了_匹配_android
              * @property {boolean} 用户代理之特征文字_匹配了_HeyTapBrowser
+             * @property {boolean} 用户代理之特征文字_匹配了_EdgA
              *
              * *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
              */
@@ -3468,10 +3489,12 @@
                         const 用户代理之特征文字_匹配了_touch = /touch/.test(用户代理之特征文字)
                         const 用户代理之特征文字_匹配了_android = /android/.test(用户代理之特征文字)
                         const 用户代理之特征文字_匹配了_HeyTapBrowser = /HeyTapBrowser/.test(用户代理之特征文字) // 2022-03 在欧珀平板的内置浏览器上观测到。
+                        const 用户代理之特征文字_匹配了_EdgA = /\sEdgA/.test(用户代理之特征文字) // 2022-03 在安卓平台的微软 Edge 浏览器中观测到。
 
                         const 浏览器运行在安卓平台 = [
                             用户代理之特征文字_匹配了_android,
                             用户代理之特征文字_匹配了_HeyTapBrowser,
+                            用户代理之特征文字_匹配了_EdgA,
                         ].some(匹配结果 => !!匹配结果)
 
                         const 浏览器运行在IOS平台 = [
@@ -3507,6 +3530,7 @@
                         调试信息集.用户代理之特征文字_匹配了_touch = 用户代理之特征文字_匹配了_touch
                         调试信息集.用户代理之特征文字_匹配了_android = 用户代理之特征文字_匹配了_android
                         调试信息集.用户代理之特征文字_匹配了_HeyTapBrowser = 用户代理之特征文字_匹配了_HeyTapBrowser
+                        调试信息集.用户代理之特征文字_匹配了_EdgA = 用户代理之特征文字_匹配了_EdgA
 
                         const { 应用根元素 } = this.$界面元素集
                         const { classList } = 应用根元素
