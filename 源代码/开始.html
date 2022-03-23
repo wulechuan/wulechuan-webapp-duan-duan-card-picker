@@ -785,6 +785,7 @@
             padding: 0.5em;
         }
 
+        .设备屏幕可触控.看似并非经典计算机设备 .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板,
         .缩略图列表.已有条目选中 > li.该条目未选中:hover .交换两条目位置之功能面板 {
             /* display: flex; */
             height: 4.5em;
@@ -792,12 +793,6 @@
     </style>
 
     <style>
-        @media screen and (pointer:coarse) {
-            .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板 {
-                height: 4.5em;
-            }
-        }
-
         @media screen and (max-width: 1200px) and (min-height: 1200px) {
             html { font-size: 24px; }
             .应用顶部内容块 button { margin-right: 1em; }
@@ -3289,6 +3284,7 @@
              * *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
              *
              * @property {string} 所有图片文件之公共路径
+             * @property {boolean} 看似并非经典计算机设备
              * @property {boolean} 设备屏幕可触控
              * @property {boolean} 浏览器运行在安卓平台
              * @property {boolean} 用户代理之特征文字_匹配了_touch
@@ -3474,7 +3470,12 @@
                         ].some(匹配结果 => !!匹配结果)
 
                         const 浏览器运行在IOS平台 = [
-                        ].some(匹配结果 => !!匹配结果)
+                        ].some(因素成立 => !!因素成立)
+
+                        const 看似并非经典计算机设备 = [
+                            浏览器运行在安卓平台,
+                            浏览器运行在IOS平台,
+                        ].some(因素成立 => !!因素成立)
 
                         const 设备屏幕可触控 = [
                             // 用户代理之特征文字_匹配了_touch,
@@ -3483,7 +3484,7 @@
                             (function 设备屏幕可触控 () {
                                 return ( 'ontouchstart' in window ) || ( navigator.maxTouchPoints > 0 ) || ( navigator.msMaxTouchPoints > 0 )
                             })(),
-                        ].some(匹配结果 => !!匹配结果)
+                        ].some(因素成立 => !!因素成立)
 
                         let 所有图片文件之公共路径 = 所有图片文件之公共路径_标准
                         if (浏览器运行在安卓平台) {
@@ -3495,11 +3496,27 @@
                         数据集.设备屏幕可触控 = 设备屏幕可触控
 
                         调试信息集.所有图片文件之公共路径 = 所有图片文件之公共路径
+                        调试信息集.看似并非经典计算机设备 = 看似并非经典计算机设备
                         调试信息集.设备屏幕可触控 = 设备屏幕可触控
                         调试信息集.浏览器运行在安卓平台 = 浏览器运行在安卓平台
                         调试信息集.用户代理之特征文字_匹配了_touch = 用户代理之特征文字_匹配了_touch
                         调试信息集.用户代理之特征文字_匹配了_android = 用户代理之特征文字_匹配了_android
                         调试信息集.用户代理之特征文字_匹配了_HeyTapBrowser = 用户代理之特征文字_匹配了_HeyTapBrowser
+
+                        const { 应用根元素 } = this.$界面元素集
+                        const { classList } = 应用根元素
+
+                        if (设备屏幕可触控) {
+                            classList.add('设备屏幕可触控')
+                        } else {
+                            classList.remove('设备屏幕可触控')
+                        }
+
+                        if (看似并非经典计算机设备) {
+                            classList.add('看似并非经典计算机设备')
+                        } else {
+                            classList.remove('看似并非经典计算机设备')
+                        }
                     },
 
                     /**
