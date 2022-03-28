@@ -739,15 +739,11 @@
             display: block;
         }
 
-        .缩略图列表 > li .交换两条目位置之功能面板 {
-            display: flex;
+        .缩略图列表 > li .交换两条目位置之功能面板之容器 {
             z-index: 20;
-            box-sizing: border-box;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
+            display: block;
             overflow: hidden;
-
+            box-sizing: border-box;
             position: absolute;
             top: auto;
             left: 0;
@@ -755,13 +751,26 @@
             bottom: 0;
             width: 100%;
             height: 0;
-            padding: 0 0.33em;
+            padding: 0;
             margin: 0;
-            border-radius: 0;
 
-            transition-property: height, padding;
+            transition-property: height;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+        }
+
+        .缩略图列表 > li .交换两条目位置之功能面板 {
+            display: flex;
+            box-sizing: border-box;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            width: 100%;
+            height: 4.25em;
+            margin: 0;
+            border-radius: 0;
         }
 
         .应全面采用端儿偏好的样式 .缩略图列表 > li .交换两条目位置之功能面板 {
@@ -784,16 +793,13 @@
             border-radius: 0.5em;
         }
 
-        .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板 {
-            /* display: flex; */
-            height: 1em;
-            padding: 0.5em;
+        .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板之容器 {
+            height: 1.5em;
         }
 
-        .设备屏幕可触控.看似并非经典计算机设备 .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板,
-        .缩略图列表.已有条目选中 > li.该条目未选中:hover .交换两条目位置之功能面板 {
-            /* display: flex; */
-            height: 4.5em;
+        .设备屏幕可触控.看似并非经典计算机设备 .缩略图列表.已有条目选中 > li.该条目未选中 .交换两条目位置之功能面板之容器,
+        .缩略图列表.已有条目选中 > li.该条目未选中:hover .交换两条目位置之功能面板之容器 {
+            height: 4.25em;
         }
     </style>
 
@@ -2822,6 +2828,9 @@
                         删除按钮元素.className = '删除按钮'
                         删除按钮元素.innerText = '⨉'
 
+                        const 交换两条目位置之功能面板之容器元素 = 创建元素('div')
+                        交换两条目位置之功能面板之容器元素.className = '交换两条目位置之功能面板之容器'
+
                         const 交换两条目位置之功能面板元素 = 创建元素('div')
                         交换两条目位置之功能面板元素.className = '交换两条目位置之功能面板'
 
@@ -2830,11 +2839,12 @@
                         交换条目之按钮元素.innerText = '与选中的条目交换位置'
 
                         交换两条目位置之功能面板元素.appendChild(交换条目之按钮元素)
+                        交换两条目位置之功能面板之容器元素.appendChild(交换两条目位置之功能面板元素)
 
                         中央容器元素.appendChild(删除按钮元素)
                         中央容器元素.appendChild(内容等级称谓元素)
                         中央容器元素.appendChild(图像元素)
-                        中央容器元素.appendChild(交换两条目位置之功能面板元素)
+                        中央容器元素.appendChild(交换两条目位置之功能面板之容器元素)
 
                         根元素.appendChild(中央容器元素)
 
