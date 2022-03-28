@@ -57,7 +57,7 @@
         label.包裹着输入项 {
             cursor: pointer;
             font-size: 1rem;
-            padding: 0.25em 0.8em;
+            padding: 0.5em 1em;
             border-radius: 0.35em;
             margin-right: 1em;
             display: inline-flex;
@@ -68,6 +68,7 @@
             transition-property: color, border-color, background-color;
             transition-timing-function: ease-out;
             transition-duration: 0.319s;
+            text-align: left;
         }
 
         label.包裹着输入项:hover {
@@ -84,13 +85,17 @@
             font-size: inherit;
             width: 1em;
             height: 1em;
+            min-width: 1em; /* 迁就火狐浏览器。 */
+            max-width: 1em; /* 迁就火狐浏览器。 */
+            min-height: 1em; /* 迁就火狐浏览器。 */
+            max-height: 1em; /* 迁就火狐浏览器。 */
             margin: 0.27em 0.7em 0.27em 0;
 
             color: rgb(70, 54, 139);
             border-color: currentColor;
         }
 
-        input[type="checkbox"]::before {
+        input[type="checkbox"]::before { /* 火狐浏览器中的 input 元素不支持 ::before 。 */
             content: '';
             display: block;
             box-sizing: border-box;
@@ -369,7 +374,7 @@
         .中央内容块 .控制面板内容块 .用于令按钮居中的辅助排版块,
         .中央内容块 .控制面板内容块 label.包裹着输入项 {
             box-sizing: border-box;
-            width: 13.25em;
+            width: 13.75em;
             margin: 0.25em 1.25em;
         }
 
