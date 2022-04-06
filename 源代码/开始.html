@@ -133,21 +133,21 @@
             line-height: 1.75;
         }
 
-        dl > .字典表条目 {
+        dl > .字典式列表之条目 {
             padding: 0;
             margin: 0 0 1.5em 0;
         }
 
-        dl > .字典表条目:last-child {
+        dl > .字典式列表之条目:last-child {
             margin-bottom: 0;
         }
 
-        dl > .字典表条目 > dt {
+        dl > .字典式列表之条目 > dt {
             padding: 0.25em 1.25em;
             margin: 0 -1.25em;
         }
 
-        dl > .字典表条目 > dd {
+        dl > .字典式列表之条目 > dd {
             padding: 0.25em 1.25em;
             margin: 0 0 0 0.75em;
         }
@@ -907,12 +907,12 @@
                 <div class="调试工具面板" style="display: none;">
                     <div class="调试工具面板内容">
                         <dl class="调试工具面板字典表">
-                            <div class="字典表条目 用户代理之特征文字">
+                            <div class="字典式列表之条目 用户代理之特征文字">
                                 <dt>用户代理之特征文字：</dt>
                                 <dd><em class="用户代理之特征文字"></em></dd>
                             </div>
 
-                            <div class="字典表条目 窗口尺寸信息">
+                            <div class="字典式列表之条目 窗口尺寸信息">
                                 <dt>窗口尺寸（单位：虚拟像素）：</dt>
                                 <dd><em class="窗口尺寸-宽"></em>×<em class="窗口尺寸-高"></em></dd>
                             </div>
@@ -1811,8 +1811,8 @@
                             const 属性值 = 欲处理的对象[属性名]
                             const 属性值文字 = `${属性值}`
 
-                            const 字典表条目根元素 = 创建元素('div')
-                            字典表条目根元素.className = '字典表条目'
+                            const 字典式列表之条目根元素 = 创建元素('div')
+                            字典式列表之条目根元素.className = '字典式列表之条目'
 
                             const dt元素 = 创建元素('dt')
                             const dd元素 = 创建元素('dd')
@@ -1823,10 +1823,10 @@
 
                             dd元素.appendChild(em元素1)
 
-                            字典表条目根元素.appendChild(dt元素)
-                            字典表条目根元素.appendChild(dd元素)
+                            字典式列表之条目根元素.appendChild(dt元素)
+                            字典式列表之条目根元素.appendChild(dd元素)
 
-                            调试工具面板字典表.界面元素.append(字典表条目根元素)
+                            调试工具面板字典表.界面元素.append(字典式列表之条目根元素)
                         })
                     },
 
